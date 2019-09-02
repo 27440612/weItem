@@ -1,7 +1,10 @@
 <template>
 	<div>
 	    <header>
-		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i><p>上海<router-link to="./logon" class="j-router"><span>登录|注册</span></router-link></p>
+		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i><p>上海<router-link to="./logon" class="j-router">
+		  		<span v-show="false">登录|注册</span>
+		  		<span v-show="true"><i class="icon iconfont icon-rentou" style="font-size: 18px;float: left;line-height: 50px;margin-right: 10px;color: #fff;"></i></span>
+		  	</router-link></p>
 		</header>
 		
 		<div class="nav">
@@ -67,6 +70,7 @@
 	export default{
 		data(){
 			return {
+				type:true,
 				id:'',
 				city:'',
 				typehttp:'',
@@ -94,12 +98,9 @@
 		created(){
 			this.shophttp='//elm.cangdu.org/img/'
 			this.typehttp = 'https://fuss10.elemecdn.com';
-//			this.id=3
-//			fetch('https://elm.cangdu.org/v1/cities/1')
-//			.then(response=>response.json())
-//			.then(response=>{
-//				this.city = response;
-//			})
+			
+//			if()
+			
 //		分类
 			fetch('https://elm.cangdu.org/v2/index_entry')
 			.then(response=>response.json())
