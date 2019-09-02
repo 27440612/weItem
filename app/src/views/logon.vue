@@ -17,12 +17,12 @@
 			</div>
 			<div class="j-content-three">
 				<div class="j-content-three-left"><input type="text" placeholder="验证码" class="j-inputss" v-model="verifyNumber"></div>
-				<div class="j-content-three-center">
-					<img :src="verifyImg" class="password_img" />
-				</div>
 				<div class="j-content-three-right">
 					<p>看不清</p>
 					<p @click="verifyImg_again">换一张</p>
+				</div>
+				<div class="j-content-three-center">
+					<img :src="verifyImg" class="password_img" />
 				</div>
 			</div>
 		</div>
@@ -242,7 +242,7 @@
 	}
 	
 	.j-content-three-left {
-		width: 5.666666rem;
+		width: 3.666666rem;
 		height: 1.2rem;
 		float: left;
 	}
@@ -250,7 +250,7 @@
 	.j-content-three-center {
 		width: 1.733333rem;
 		height: 1.333333rem;
-		float: left;
+		float: right;
 	}
 	
 	.j-content-three-right {
