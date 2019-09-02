@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import logon from "./views/logon.vue";
 import login from "./views/login.vue";
+import amend from "./views/Amend.vue";
 
 Vue.use(Router);
 
@@ -33,6 +34,10 @@ export default new Router({
       path: "/login",
       name: "login",
       component: login
+    },{
+    	path:"/amend",
+     name:"amend",
+     component:amend
     }
   ]
 });

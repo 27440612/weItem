@@ -33,7 +33,7 @@
 			<button class="j-btn" @click="logon_btn">登录</button>
 		</div>
 		<div class="j-footer-bottom">
-			重置密码?
+			<router-link to="/amend" class="j-router" style="color:#95c4ef">重置密码?</router-link>
 		</div>
 	</div>
 </template>
