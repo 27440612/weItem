@@ -1,16 +1,16 @@
 <template>
 	<div class="j-box">
 		<div class="j-header">
-			<div class="j-headerleft">&lt;</div>
+			<div class="j-headerleft"><router-link to="./login" class="j-router">&lt;</router-link></div>
 			<div class="j-headerright">密码登录</div>
 		</div>
 		<div class="j-content">
-			<div class="j-content-one"><input type="text" placeholder="账号" class="j-input" v-model="logon"></div>
+			<div class="j-content-one"><input type="text" placeholder="账号" class="j-input j-width" v-model="logon"></div>
 			<div class="j-content-two">
 				<div class="j-content-two-left"><input type="password" placeholder="密码" class="j-inputs" v-model="password" id="seePassword"></div>
 				<div class="j-content-two-right">
 					<div class="j-see-password" id="password">
-						off...
+						<span id="passwordS">off...</span>
 						<div class="j-see-password-move" :class="isOpen?'active':''" @click="passMove($event)" id="j-see-password-move"></div>
 					</div>
 				</div>
@@ -44,10 +44,10 @@
 			return {
 				isOpen:false,
 				logon: '',
-				password: '12121',
+				password: '',
 				verify: '',
 				verifyImg: '',
-				verifyNumber: '12',
+				verifyNumber: '',
 			}
 		},
 		methods: {
@@ -55,32 +55,42 @@
 				this.isOpen = !this.isOpen;
 				var seePassword = document.querySelector('#seePassword')
 				var password=document.querySelector('#password')
+				var passwordS=document.querySelector('#passwordS')
 				if(this.isOpen){
 					seePassword.type = 'text'
 					password.style.background='#4cd964'
+					passwordS.innerHTML='off'
 				}else{
 					seePassword.type = 'password'
 					password.style.background='#CCCCCC'
-					
+					passwordS.innerHTML='on'
 				}
 			},
 			logon_btn(a) {
-				if(this.logon == '' || this.password == '' || this.verifyNumber == '') {
-					alert('密码或用户为空')
-					return
-				} else {
+				if(this.logon == '') {
+					alert('请输入账号');
+					return;
+				} else if (this.password == ''){
+					alert('请输入密码')
+					return;
+				} else if (this.verifyNumber == ''){
+					alert('请输入验证码')
+					return;
+				}else {
 					this.axios.post('https://elm.cangdu.org/v2/login', {
 						username: this.logon,
 						password: this.password,
 						captcha_code: this.verifyNumber
 					}).then((data) => {
-						if(this.logon == data.data.username && this.password == data.data.password) {
-							alert('登录成功')
-						} else{
-							alert('登录失败')
-
-						}
 						console.log(data);
+						if(data.data.message == '密码错误') {
+							alert('登录失败');
+						} else if (data.data.message == '验证码不正确'){
+							alert('验证码错误');
+						} else {
+							alert('登录成功');
+                            this.$router.push({path:'/login'})
+						}
 					})
 
 				}
@@ -131,36 +141,36 @@
 	
 	.j-headerright {
 		color: white;
-		height: 1.2rem;
 		float: left;
 		line-height: 1.2rem;
 		font-size: 0.466666rem;
-		margin-left: 4.0rem;
+		width: 90%;
+		text-align: center;
 	}
 	
 	.j-content {
 		width: 100%;
-		height: 4rem;
 		background: white;
 		margin-top: 0.333333rem;
 	}
 	
 	.j-content-one {
 		width: 100%;
-		height: 1.333333rem;
+
 		border-bottom: 1px solid #ccc;
 	}
 	
 	.j-content-two-left {
-		width: 6.666666rem;
-		height: 1.333333rem;
+		width: 100%;
 		float: left;
-		margin-left: 0.266666rem;
+
 	}
 	
 	.j-content-two-right {
 		width: 1.5rem;
-		height: 1.333333rem;
+		/*position:relative;
+		top: -1.25rem;*/
+		margin-top: -1.2rem;
 		float: right;
 		margin-right: 0.533333rem;
 	}
@@ -184,6 +194,7 @@
 		position: absolute;
 		left: 0;
 		top: -0.19rem;
+		transition: .25s;
 	}
 	.j-see-password .active{
 		left: 0.733rem;
@@ -193,24 +204,26 @@
 		width: 6.666666rem;
 		height: 1.2rem;
 		line-height: 1.2rem;
-		margin-left: -2.733334rem;
 		font-size: 0.4rem;
 		border: none;
 		outline: none;
+		border-bottom:1px solid gray;
 	}
 	
 	.j-inputs {
-		width: 6.666666rem;
+		width: 100%;
 		height: 1.2rem;
 		line-height: 1.2rem;
 		font-size: 0.4rem;
 		border: none;
+		border-bottom:1px solid gray;
 		outline: none;
+		padding-left: 1em;
+		
 	}
 	
 	.j-content-two {
 		width: 100%;
-		height: 1.333333rem;
 		border-bottom: 1px solid #ccc;
 	}
 	
@@ -280,7 +293,7 @@
 	}
 	
 	.j-footer {
-		width: 9.333333rem;
+		width:90%;
 		height: 1.266666rem;
 		background: #4cd964;
 		border-radius: 0.133333rem;
@@ -288,7 +301,7 @@
 	}
 	
 	.j-btn {
-		width: 9.333333rem;
+		width: 80%;
 		height: 1.266666rem;
 		color: white;
 		border: none;
@@ -312,5 +325,13 @@
 		width: 1.853333rem;
 		height: 0.866666rem;
 		margin-top: 0.24rem;
+	}
+	.j-width{
+		width:100%;
+		padding-left: 1em;
+	}
+	.j-router{
+		text-decoration: none;
+		color: white
 	}
 </style>
