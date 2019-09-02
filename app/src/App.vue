@@ -1,11 +1,15 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/logon">logon</router-link>
     </div>
     <router-view />
+=======
+    <router-view /></router-view />
+>>>>>>> 5b0452b351031056ab3aab64a2cb589dc14518c7
   </div>
 </template>
 <script>
@@ -23,6 +27,7 @@
   text-align: center;
   color: #2c3e50;
 }
+<<<<<<< HEAD
 #nav {
   padding: 30px;
   a {
@@ -34,4 +39,6 @@
   }
 }
 
+=======
+>>>>>>> 5b0452b351031056ab3aab64a2cb589dc14518c7
 </style>
