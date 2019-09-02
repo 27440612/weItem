@@ -1,7 +1,7 @@
 <template>
 	<div>
 	    <header>
-		  	<p>上海<span>登录|注册</span></p>
+		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i><p>上海<span>登录|注册</span></p>
 		</header>
 		
 		<div class="nav">
@@ -72,11 +72,15 @@
 				typehttp:'',
 				alltype:{},
 				allshop:{},
+				allres:{},
 			}
 		},
 		methods:{
+//      搜索餐馆
+		search(){
+			}
 		},
-		  mounted(){
+		mounted(){
 		    new Swiper ('.swiper-container', {
 			    direction: 'horizontal', // 垂直切换选项
 			    loop: false, // 循环模式选项
@@ -86,7 +90,7 @@
 			      el: '.swiper-pagination',
 			    }
 			  })            
-		  },
+		},
 		created(){
 			this.shophttp='//elm.cangdu.org/img/'
 			this.typehttp = 'https://fuss10.elemecdn.com';
@@ -108,7 +112,6 @@
 			.then(response=>response.json())
 			.then(response=>{
 				this.allshop = response;
-				console.log(response)
 			})
 		}
 		
