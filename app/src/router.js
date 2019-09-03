@@ -3,9 +3,9 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Hmpage from "./views/w-Hmpage.vue"
 import Search from "./views/w-Search.vue"
-import logon from "./views/logon.vue";
-import login from "./views/login.vue";
-import amend from "./views/Amend.vue";
+import logon from "./views/logon.vue"
+import login from "./views/login.vue"
+import amend from "./views/Amend.vue"
 
 Vue.use(Router);
 
@@ -33,7 +33,7 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/About.vue")
     },
     {
-      path: "/w-Hmpage",
+      path: "/",
       name: "w-Hmpage",
       component: Hmpage,
       props:route=>({name:route.query})
@@ -42,7 +42,8 @@ export default new Router({
     {
       path: "/w-Search",
       name: "w-Search",
-      component: Search
+      component: Search,
+      props:route=>({name:route.query})
   	},{
       path: "/login",
       name: "login",
