@@ -63,7 +63,7 @@ export default {
   data(){
     return{
       // 定位地址
-      Locating:'',
+      Locating:{},
       // 热门城市
       Popular: [],
       // 全部城市
@@ -77,23 +77,22 @@ export default {
     // 定位地址   北京
     this.$http.get('https://elm.cangdu.org/v1/cities?type=guess')
       .then(res=>{
-        this.Locating = res.body
+        this.Locating = res.data || {}
         // localStorage.setItem("name",this.Locating)
-        console.log(this.$route)
       }).catch(error=>{
         console.log(error)
       })
     // 热门城市 hot
     this.$http.get('https://elm.cangdu.org/v1/cities?type=hot')
      .then(res=>{
-       this.Popular = res.body;
-     }).catch(error=>{
+       this.Popular = res.data || {};
+     }).catch(error=>{ 
         console.log(error)
       })
     // 全部城市
     this.$http.get('https://elm.cangdu.org/v1/cities?type=group')
     .then(res=>{
-      this.Allcities = res.data;
+      this.Allcities = res.data || {};
     }).catch(error=>{
         console.log(error)
       })

@@ -61,6 +61,8 @@ export default {
         }
     },
     created () {
+    
+        console.log(this.$route)
         if(localStorage.hisrecords){
             //  localStorage.hisrecords = JSON.parse(this.hisrecords)
             this.hisrecords = JSON.parse(localStorage.hisrecords)

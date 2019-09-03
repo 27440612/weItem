@@ -12,12 +12,9 @@
     "core-js": "^2.6.5",
     "lib-flexible": "^0.3.2",
     "vue": "^2.6.10",
-<<<<<<< HEAD
     "vue-resource": "^1.5.1",
-=======
     "vue-awesome-swiper": "^3.1.3",
     "vue-axios": "^2.1.4",
->>>>>>> 4f88dc06ab31c2951facaf98b2f630d4e6ae9f04
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },
