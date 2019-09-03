@@ -1,9 +1,12 @@
 <template>
 	<div>
 	    <header>
-		  	<i class="icon iconfont icon-sousuo" style="font-size: 0.276923rem;float: left;line-height: 0.76923rem;margin-left: 0.153846rem;color: #fff;" @click="search"></i><p>{{this.$route.query.address}}<router-link to="./logon" class="j-router">
+		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i>
+		  	<p style="text-align: center;">{{this.$route.query.address}}<router-link to="./logon" class="j-router">
+		  		
 		  		<span v-show="false">登录|注册</span>
-		  		<span v-show="true"><i class="icon iconfont icon-rentou" style="font-size: 0.276923rem;float: left;line-height: 0.76923rem;margin-right: 0.153846rem;color: #fff;"></i></span>
+		  		
+		  		<i class="icon iconfont icon-rentou" style="font-size: 17px;float: right;line-height:49px;margin-right:10px;color: #fff;" v-show="true"></i>
 		  	</router-link></p>
 		</header>
 		
@@ -32,7 +35,7 @@
 		
 		<div class="main">
 			<div class="top">
-				<i class="icon iconfont icon-shangdian" style="font-size: 0.261538rem;margin-right: 0.061538rem;"></i>
+				<i class="icon iconfont icon-shangdian" style="font-size: 17px;margin-right:4px;"></i>
 				附近商家
 			</div>
 			<div class="shops" v-for="i,key in allshop">
@@ -44,7 +47,7 @@
 					
 					<div class="talk">
 						评分
-						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 0.015384rem #3190e8 solid;background: #fff;">准时送</span></div>
+						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 1px #3190e8 solid;background: #fff;">准时送</span></div>
 					</div>
 					<div class="xian">
 						￥{{i.float_minimum_order_amount}}起送 / 配送费约 ￥{{i.float_delivery_fee}}
@@ -98,8 +101,7 @@
 		created(){
 			this.shophttp='//elm.cangdu.org/img/'
 			this.typehttp = 'https://fuss10.elemecdn.com';
-			console.log(this.$route)
-//			if()
+//			console.log(this.$route)
 			
 //		分类
 			fetch('https://elm.cangdu.org/v2/index_entry')
@@ -109,11 +111,14 @@
 			})
 			
 //		附近商家
+			
+			this.city=this.$route
 			fetch('https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762')
 			.then(response=>response.json())
 			.then(response=>{
 				this.allshop = response;
 			})
+			console.log(this.city)
 		}
 		
 	}
@@ -124,15 +129,15 @@
 *{padding: 0;margin: 0;}
 header{
 	width: 100%;
-	height: 1.538461rem;
+	height: 100px;
 	background: #3190e8;
 }
 header p{
-	height: 1.538461rem;
+	height: 100px;
 	color: #fff;
-	font-size: 0.461538rem;
-	line-height: 1.538461rem;
-	padding: 0.076923rem 0.123076rem 0 0.123076rem;
+	font-size: 30px;
+	line-height: 100px;
+	padding: 5px 8px 0 8px;
 	box-sizing: border-box;
 }
 header span{
@@ -142,20 +147,22 @@ header span{
 
  .swiper-container {
     width: 100%;
-    height: 5.846153rem;
-    margin: 0.307692rem auto;
+    height: 380px;
+    margin: 20px auto;
 }
 .all{
 	width: 25%;
-	height: 2.461538rem;
-	padding: 0.092307rem;
+	height: 160px;
+	padding: 6px;
+	margin-top: 12px;
+	text-align: center;
 	box-sizing: border-box;
-	margin-bottom: 0.215384rem;
+	margin-bottom: 14px;
 	float: left;
 }
 .all>.icon{
-	width: 1.538461rem;
-	height: 1.538461rem;
+	width: 100px;
+	height: 100px;
 	margin-left: 20%;
 }
 .all>.icon>img{
@@ -165,26 +172,26 @@ header span{
 .main{
 	width: 100%;
 	height: auto;
-	margin-top: 0.461538rem;
+	margin-top: 30px;
 }
 .main>.top{
-	height: 1.230769rem;
-	line-height: 1.230769rem;
+	height: 80px;
+	line-height: 80px;
 	padding-left: 1em;
 	text-align: left;
-	border-top: 0.015384rem #ccc solid;
-	border-bottom: 0.015384rem #ccc solid;
+	border-top: 1px #ccc solid;
+	border-bottom: 1px #ccc solid;
 }
 .main>.shops{
 	width: 100%;
-	height: 3.076923rem;
-	padding:0.276923rem ;
+	height: 200px;
+	padding:18px ;
 	box-sizing: border-box;
-	border-bottom: 0.015384rem #ccc solid;
+	border-bottom: 1px #ccc solid;
 }
 .main>.shops>.shopimg{
-	width: 2.307692rem;
-	height: 2.307692rem;
+	width: 150px;
+	height: 150px;
 	float: left;
 }
 .main>.shops>.shopimg>img{
@@ -193,17 +200,17 @@ header span{
 }
 .main>.shops>.shoptext{
 	width: 76%;
-	height: 2.307692rem;
+	height: 150px;
 	text-align: left;
 	float: right;
 }
 .main>.shops>.shoptext>div{
-	height: 0.76923rem;
+	height: 50px;
 }
 .main>.shops>.shoptext>.name>.shopname{
 	width: 50%;
-	height: 0.461538rem;
-	line-height: 0.461538rem;
+	height: 30px;
+	line-height: 30px;
 	float: left;
 	text-overflow: ellipsis;
 	white-space: normal;
@@ -211,12 +218,12 @@ header span{
 }
 .main>.shops>.shoptext>.name span{
 	display: inline-block;
-	font-size: 0.246153rem;
+	font-size: 16px;
 	float: left;
-	padding: 0.015384rem 0.061538rem;
+	padding: 1px 4px;
 	background: yellow;
-	margin-right: 0.061538rem;
-	border-radius: 0.061538rem;
+	margin-right: 4px;
+	border-radius: 4px;
 }
 .main>.shops>.shoptext>.talk>.song{
 	float: right;
@@ -224,11 +231,11 @@ header span{
 }
 .main>.shops>.shoptext>.talk>.song>span{
 	display: inline-block;
-	font-size: 0.215384rem;
-	padding: 0.015384rem 0.046153rem;
+	font-size: 14px;
+	padding: 1px 3px;
 	color: #fff;
-	margin-right: 0.030769rem;
-	border-radius: 0.061538rem;
+	margin-right: 2px;
+	border-radius: 4px;
 	background: #3190e8;
 }
 </style>
