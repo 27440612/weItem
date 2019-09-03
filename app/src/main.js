@@ -3,9 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "lib-flexible";
-
+import VueResourse from 'vue-resource'
 Vue.config.productionTip = false;
-
+Vue.use(VueResourse)
 new Vue({
   router,
   store,
