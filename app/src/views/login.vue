@@ -1,7 +1,7 @@
 <template>
 	<div>
 	    <header>
-		  	<i class="icon iconfont icon-sousuo" style="font-size: 0.276923rem;float: left;line-height: 0.76923rem;margin-left: 0.153846rem;color: #fff;" @click="search"></i><p>上海<router-link to="./logon" class="j-router">
+		  	<i class="icon iconfont icon-sousuo" style="font-size: 0.276923rem;float: left;line-height: 0.76923rem;margin-left: 0.153846rem;color: #fff;" @click="search"></i><p>{{this.$route.query.address}}<router-link to="./logon" class="j-router">
 		  		<span v-show="false">登录|注册</span>
 		  		<span v-show="true"><i class="icon iconfont icon-rentou" style="font-size: 0.276923rem;float: left;line-height: 0.76923rem;margin-right: 0.153846rem;color: #fff;"></i></span>
 		  	</router-link></p>
@@ -98,7 +98,7 @@
 		created(){
 			this.shophttp='//elm.cangdu.org/img/'
 			this.typehttp = 'https://fuss10.elemecdn.com';
-			
+			console.log(this.$route)
 //			if()
 			
 //		分类
