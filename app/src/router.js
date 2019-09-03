@@ -1,8 +1,15 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+<<<<<<< HEAD
 import Hmpage from "./views/w-Hmpage.vue"
 import Search from "./views/w-Search.vue"
+=======
+import logon from "./views/logon.vue";
+import login from "./views/login.vue";
+import amend from "./views/Amend.vue";
+
+>>>>>>> 4f88dc06ab31c2951facaf98b2f630d4e6ae9f04
 Vue.use(Router);
 
 export default new Router({
@@ -15,6 +22,11 @@ export default new Router({
       component: Home
     },
     {
+      path: "/logon",
+      name: "logon",
+      component: logon
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting
@@ -24,6 +36,7 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/About.vue")
     },
     {
+<<<<<<< HEAD
       path: "/w-Hmpage",
       name: "w-Hmpage",
       component: Hmpage,
@@ -34,6 +47,15 @@ export default new Router({
       path: "/w-Search",
       name: "w-Search",
       component: Search
+=======
+      path: "/login",
+      name: "login",
+      component: login
+    },{
+    	path:"/amend",
+     name:"amend",
+     component:amend
+>>>>>>> 4f88dc06ab31c2951facaf98b2f630d4e6ae9f04
     }
   ]
 });
