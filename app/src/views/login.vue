@@ -1,9 +1,9 @@
 <template>
 	<div>
 	    <header>
-		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i><p>上海<router-link to="./logon" class="j-router">
+		  	<i class="icon iconfont icon-sousuo" style="font-size: 0.24rem;float: left;line-height: 0.666666rem;margin-left: 0.133333rem;color: #fff;" @click="search"></i><p>上海<router-link to="./logon" class="j-router">
 		  		<span v-show="false">登录|注册</span>
-		  		<span v-show="true"><i class="icon iconfont icon-rentou" style="font-size: 18px;float: left;line-height: 50px;margin-right: 10px;color: #fff;"></i></span>
+		  		<span v-show="true"><i class="icon iconfont icon-rentou" style="font-size: 0.24rem;float: left;line-height: 0.666666rem;margin-right: 0.133333rem;color: #fff;"></i></span>
 		  	</router-link></p>
 		</header>
 		
@@ -32,7 +32,7 @@
 		
 		<div class="main">
 			<div class="top">
-				<i class="icon iconfont icon-shangdian" style="font-size: 17px;margin-right: 4px;"></i>
+				<i class="icon iconfont icon-shangdian" style="font-size: 0.226666rem;margin-right: 0.053333rem;"></i>
 				附近商家
 			</div>
 			<div class="shops" v-for="i,key in allshop">
@@ -44,7 +44,7 @@
 					
 					<div class="talk">
 						评分
-						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 1px #3190e8 solid;background: #fff;">准时送</span></div>
+						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 0.013333rem #3190e8 solid;background: #fff;">准时送</span></div>
 					</div>
 					<div class="xian">
 						￥{{i.float_minimum_order_amount}}起送 / 配送费约 ￥{{i.float_delivery_fee}}
@@ -124,15 +124,15 @@
 *{padding: 0;margin: 0;}
 header{
 	width: 100%;
-	height: 100px;
+	height: 1.333333rem;
 	background: #3190e8;
 }
 header p{
-	height: 100px;
+	height: 1.333333rem;
 	color: #fff;
-	font-size: 30px;
-	line-height: 100px;
-	padding: 5px 8px 0 8px;
+	font-size: 0.4rem;
+	line-height: 1.333333rem;
+	padding: 0.066666rem 0.106666rem 0 0.106666rem;
 	box-sizing: border-box;
 }
 header span{
@@ -142,20 +142,20 @@ header span{
 
  .swiper-container {
     width: 100%;
-    height: 380px;
-    margin: 20px auto;
+    height: 5.066666rem;
+    margin: 0.266666rem auto;
 }
 .all{
 	width: 25%;
-	height: 160px;
-	padding: 6px;
+	height: 2.133333rem;
+	padding: 0.08rem;
 	box-sizing: border-box;
-	margin-bottom: 14px;
+	margin-bottom: 0.186666rem;
 	float: left;
 }
 .all>.icon{
-	width: 100px;
-	height: 100px;
+	width: 1.333333rem;
+	height: 1.333333rem;
 	margin-left: 20%;
 }
 .all>.icon>img{
@@ -165,26 +165,26 @@ header span{
 .main{
 	width: 100%;
 	height: auto;
-	margin-top: 30px;
+	margin-top: 0.4rem;
 }
 .main>.top{
-	height: 80px;
-	line-height: 80px;
+	height: 1.066666rem;
+	line-height: 1.066666rem;
 	padding-left: 1em;
 	text-align: left;
-	border-top: 1px #ccc solid;
-	border-bottom: 1px #ccc solid;
+	border-top: 0.013333rem #ccc solid;
+	border-bottom: 0.013333rem #ccc solid;
 }
 .main>.shops{
 	width: 100%;
-	height: 200px;
-	padding:18px ;
+	height: 2.666666rem;
+	padding:0.24rem ;
 	box-sizing: border-box;
-	border-bottom: 1px #ccc solid;
+	border-bottom: 0.013333rem #ccc solid;
 }
 .main>.shops>.shopimg{
-	width: 150px;
-	height: 150px;
+	width: 2rem;
+	height: 2rem;
 	float: left;
 }
 .main>.shops>.shopimg>img{
@@ -193,17 +193,17 @@ header span{
 }
 .main>.shops>.shoptext{
 	width: 76%;
-	height: 150px;
+	height: 2rem;
 	text-align: left;
 	float: right;
 }
 .main>.shops>.shoptext>div{
-	height: 50px;
+	height: 0.666666rem;
 }
 .main>.shops>.shoptext>.name>.shopname{
 	width: 50%;
-	height: 30px;
-	line-height: 30px;
+	height: 0.4rem;
+	line-height: 0.4rem;
 	float: left;
 	text-overflow: ellipsis;
 	white-space: normal;
@@ -211,12 +211,12 @@ header span{
 }
 .main>.shops>.shoptext>.name span{
 	display: inline-block;
-	font-size: 16px;
+	font-size: 0.213333rem;
 	float: left;
-	padding: 1px 4px;
+	padding: 0.013333rem 0.053333rem;
 	background: yellow;
-	margin-right: 4px;
-	border-radius: 4px;
+	margin-right: 0.053333rem;
+	border-radius: 0.053333rem;
 }
 .main>.shops>.shoptext>.talk>.song{
 	float: right;
@@ -224,11 +224,11 @@ header span{
 }
 .main>.shops>.shoptext>.talk>.song>span{
 	display: inline-block;
-	font-size: 14px;
-	padding: 1px 3px;
+	font-size: 0.186666rem;
+	padding: 0.013333rem 0.04rem;
 	color: #fff;
-	margin-right: 2px;
-	border-radius: 4px;
+	margin-right: 0.026666rem;
+	border-radius: 0.053333rem;
 	background: #3190e8;
 }
 </style>
