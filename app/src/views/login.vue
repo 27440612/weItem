@@ -39,25 +39,25 @@
 				附近商家
 			</div>
 			
-			
-			<div class="shops" v-for="i,key in allshop">
-				<div class="shopimg"><img :src="shophttp + i.image_path"/></div>
-				<div class="shoptext">
-					<div class="name" style="font-weight: 600;"><span>品牌</span>
-						<div class="shopname">{{i.name}}</div>
-					</div>
-					
-					<div class="talk">
-						评分
-						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 1px #3190e8 solid;background: #fff;">准时送</span></div>
-					</div>
-					<div class="xian">
-						￥{{i.float_minimum_order_amount}}起送 / 配送费约 ￥{{i.float_delivery_fee}}
-						<div style="float: right;font-size: 12px;"><span class="time" >{{i.distance}}</span> / <span style="color: #3190e8;">{{i.order_lead_time}}</span></div>
+			<router-link to="/shopping_xiang">
+				<div class="shops" v-for="i,key in allshop">
+					<div class="shopimg"><img :src="shophttp + i.image_path"/></div>
+					<div class="shoptext">
+						<div class="name" style="font-weight: 600;"><span>品牌</span>
+							<div class="shopname">{{i.name}}</div>
+						</div>
+						
+						<div class="talk">
+							评分
+							<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 1px #3190e8 solid;background: #fff;">准时送</span></div>
+						</div>
+						<div class="xian">
+							￥{{i.float_minimum_order_amount}}起送 / 配送费约 ￥{{i.float_delivery_fee}}
+							<div style="float: right;font-size: 12px;"><span class="time" >{{i.distance}}</span> / <span style="color: #3190e8;">{{i.order_lead_time}}</span></div>
+						</div>
 					</div>
 				</div>
-			</div>
-			
+			</router-link>
 		</div>
 		
 		
