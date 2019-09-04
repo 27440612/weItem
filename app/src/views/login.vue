@@ -2,12 +2,12 @@
 	<div>
 	    <header>
 		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i>
-		  	<p style="text-align: center;">{{this.$route.query.address}}<router-link to="./logon" class="j-router">
-		  		
+		  	<p style="text-align: center;">{{this.$route.query.address}}</p>
+			<i class="icon iconfont icon-rentou Login-i" style="font-size: 17px;float: right;line-height:49px;margin-right:10px;color: #fff;" v-show="true"></i>
+			<router-link to="./logon" class="j-router"></p>
 		  		<span v-show="false">登录|注册</span>
-		  		
-		  		<i class="icon iconfont icon-rentou" style="font-size: 17px;float: right;line-height:49px;margin-right:10px;color: #fff;" v-show="true"></i>
-		  	</router-link></p>
+		  	</router-link>
+			
 		</header>
 		
 		<div class="nav">
@@ -125,26 +125,34 @@
 	
 	
 </script>
-<style>
+<style scoped>
 *{padding: 0;margin: 0;}
+a{
+	color:#666;
+}
 header{
 	width: 100%;
 	height: 100px;
 	background: #3190e8;
 }
 header p{
+	width: 51%;
 	height: 100px;
 	color: #fff;
 	font-size: 30px;
 	line-height: 100px;
 	padding: 5px 8px 0 8px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	box-sizing: border-box;
+	text-algin: center;
+	margin-left: 26%;
 }
 header span{
 	display: block;
 	float: right;
 }
-
  .swiper-container {
     width: 100%;
     height: 380px;
@@ -160,21 +168,30 @@ header span{
 	margin-bottom: 14px;
 	float: left;
 }
-.all>.icon{
+.icon{
 	width: 100px;
 	height: 100px;
 	margin-left: 20%;
 }
-.all>.icon>img{
+.icon img{
 	width: 100%;
 	height: 100%;
+}
+.Login-i{
+	position: absolute;
+	right: -40px;
+	top: 10px;
+}
+.icon-sousuo{
+	padding-left: 20px;
+	padding-top: 6px;
 }
 .main{
 	width: 100%;
 	height: auto;
 	margin-top: 30px;
 }
-.main>.top{
+.top{
 	height: 80px;
 	line-height: 80px;
 	padding-left: 1em;
@@ -182,32 +199,35 @@ header span{
 	border-top: 1px #ccc solid;
 	border-bottom: 1px #ccc solid;
 }
-.main>.shops{
+.icon-shangdian{
+	margin-left: 0;
+}
+.shops{
 	width: 100%;
 	height: 200px;
 	padding:18px ;
 	box-sizing: border-box;
 	border-bottom: 1px #ccc solid;
 }
-.main>.shops>.shopimg{
+.shopimg{
 	width: 150px;
 	height: 150px;
 	float: left;
 }
-.main>.shops>.shopimg>img{
+.shopimg>img{
 	width: 100%;
 	height: 100%;
 }
-.main>.shops>.shoptext{
+.shoptext{
 	width: 76%;
 	height: 150px;
 	text-align: left;
 	float: right;
 }
-.main>.shops>.shoptext>div{
+.shoptext>div{
 	height: 50px;
 }
-.main>.shops>.shoptext>.name>.shopname{
+.shopname{
 	width: 50%;
 	height: 30px;
 	line-height: 30px;
@@ -215,8 +235,12 @@ header span{
 	text-overflow: ellipsis;
 	white-space: normal;
 	overflow: hidden;
+	color: #333;
+	font-weight: bold;
+	font-size: 0.45rem;
 }
-.main>.shops>.shoptext>.name span{
+.name span{
+	color: #333;
 	display: inline-block;
 	font-size: 16px;
 	float: left;
@@ -225,11 +249,11 @@ header span{
 	margin-right: 4px;
 	border-radius: 4px;
 }
-.main>.shops>.shoptext>.talk>.song{
+.song{
 	float: right;
 	
 }
-.main>.shops>.shoptext>.talk>.song>span{
+.song span{
 	display: inline-block;
 	font-size: 14px;
 	padding: 1px 3px;
@@ -238,4 +262,5 @@ header span{
 	border-radius: 4px;
 	background: #3190e8;
 }
+
 </style>
