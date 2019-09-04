@@ -38,6 +38,8 @@
 				<i class="icon iconfont icon-shangdian" style="font-size: 17px;margin-right:4px;"></i>
 				附近商家
 			</div>
+			
+			
 			<div class="shops" v-for="i,key in allshop">
 				<div class="shopimg"><img :src="shophttp + i.image_path"/></div>
 				<div class="shoptext">
@@ -51,7 +53,7 @@
 					</div>
 					<div class="xian">
 						￥{{i.float_minimum_order_amount}}起送 / 配送费约 ￥{{i.float_delivery_fee}}
-						<div style="float: right;"><span class="time" >{{i.distance}}</span> / <span style="color: #3190e8;">{{i.order_lead_time}}</span></div>
+						<div style="float: right;font-size: 12px;"><span class="time" >{{i.distance}}</span> / <span style="color: #3190e8;">{{i.order_lead_time}}</span></div>
 					</div>
 				</div>
 			</div>
@@ -111,8 +113,6 @@
 			})
 			
 //		附近商家
-			
-			this.city=this.$route
 			fetch('https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762')
 			.then(response=>response.json())
 			.then(response=>{
