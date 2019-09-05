@@ -6,6 +6,7 @@ import Search from "./views/w-Search.vue"
 import logon from "./views/logon.vue"
 import login from "./views/login.vue"
 import amend from "./views/Amend.vue"
+import shopping_xiang from "./views/shopping_xiang.vue"
 
 Vue.use(Router);
 
@@ -52,6 +53,10 @@ export default new Router({
     	path:"/amend",
      name:"amend",
      component:amend
+    },{
+    	path:"/shopping_xiang",
+     name:"shopping_xiang",
+     component:shopping_xiang
     }
   ]
 });
