@@ -1,6 +1,12 @@
 <template>
 	<div class="box">
 		
+		<!--返回图标-->
+		<router-link to="/login">
+			<div class="returnbtn"><i class="icon iconfont icon-fanhui1-copy" style="font-size: 20px;"></i></div>
+		</router-link>
+		
+		
 		<header>
 			<div class="h_img">
 				<img :src="shophttp + this.$route.params.image"/>
@@ -27,19 +33,17 @@
 				<span :class='type?"":"span"'></span>
 			</p>
 			
-			<router-link to="/login">
-				<div class="returnbtn"><i class="icon iconfont icon-fanhui1-copy" style="font-size: 16px;"></i></div>
-			</router-link>
+			
 		</div>
 
 		<div class="content clearfix">
 			<!-- 左侧菜单 -->
 			<div class='product'>
-				<div @click='xianshi(index)' v-for='item,index in arr' :class='{"active":i==index}'>
+				<div @click='xianshi(index),num=index' v-for='item,index in arr' :class="[num==index ? 'blue' : '']">
 					{{item.name}}
 				</div>
 
-				<div @click='xianshi(index)' v-for='(item,index) in arr' :class="{'active':i==index}" :key="index">
+				<div @click='xianshi(index)' v-for='(item,index) in arr'  :key="index">
 					{{item.type}}
 				</div>
 			</div>
@@ -54,7 +58,7 @@
 					<div class="text">
 						<p style="font-size: 14px;">{{item.specfoods[0].name}}</p>
 						<div class='bt'>
-							<span class='price' style="font-size: 13px;">￥{{item.specfoods[0].price}}</span> 起
+							<span class='price' style="font-size: 13px;">￥ {{item.specfoods[0].price}} 起</span>
 							<p>
 								<span class='jian' @click='del(item.specfoods[0])'>-</span> {{item.specfoods[0].num || 0}}
 								<span class='jia' @click='add(item.specfoods[0])'>+</span>
@@ -65,7 +69,7 @@
 
 			</div>
 			<footer class='footer'>
-				总价:{{total}}元
+				总价 : {{total}} 元
 				<router-link :to="{name:'/',params:{selectList}}">
 					去结算
 				</router-link>
@@ -85,7 +89,8 @@
 				list: [],
 				i: 0,
 				idx: 0,
-				addArr: []
+				addArr: [],
+				num:0
 			}
 		},
 		created() {
@@ -156,14 +161,14 @@
 </script>
 <style scoped>
 	header{
-		padding: 20px;
-		height: 200px;
+		padding: 20px 30px;
+		height: 180px;
 		box-sizing: border-box;
 		background:rgba(0,0,0,0.2) 
 	}
 	.h_img{
-		width: 160px;
-		height: 160px;
+		width: 140px;
+		height: 140px;
 		background: cornflowerblue;
 		float: left;
 	}
@@ -195,9 +200,10 @@
 		color: #fff;
 	}
 	.returnbtn{
-		position: absolute;
+		color: black;
+		position: fixed;
 		left: 14px;
-		top: 3px;
+		top: 50px;
 	}
 	.box{
 		overflow-x: hidden;
@@ -209,15 +215,15 @@
 		background: #fff;
 	}
 	.header {
-		height: 120px;
+		height: 100px;
 		overflow: hidden;
-		line-height: 120px;
+		line-height: 100px;
 		border-bottom: 1px #E4E4E4 solid;
 	}
 	
 	.header p {
 		width: 50%;
-		font-size: 34px;
+		font-size: 32px;
 		position: relative;
 		text-align: center;
 		float: left;
@@ -257,6 +263,11 @@
 		float: left;
 	}
 	
+	 .blue{
+	    background-color: #fff !important;
+	    border-left: solid 3px #2a8cef !important;
+	  }
+	
 	.hot {
 		border-right: 1px #ccc solid;
 	}
@@ -281,10 +292,10 @@
 	
 	.product div {
 		width: 100%;
-		height: 120px;
+		height: 90px;
 		background: #F5F5F5;
 		font-size: 26px;
-		line-height: 120px;
+		line-height: 90px;
 		box-sizing: border-box;
 		border-bottom: 1px #ccc solid;
 		overflow: hidden;
@@ -300,7 +311,7 @@
 	.item-box,
 	.jiesuan {
 		width: 100%;
-		height: 224px;
+		height: 210px;
 		padding: 20px 12px;
 		border-bottom: 1px #ccc solid;
 		box-sizing: border-box;
@@ -330,7 +341,7 @@
 	}
 	
 	.price {
-		color: orangered;
+		color: orange;
 	}
 	
 	.text .bt p {
@@ -352,12 +363,12 @@
 	.footer {
 		width: 100%;
 		height: 120px;
-		background: cornflowerblue;
-		opacity: .9;
+		background: #333;
 		position: fixed;
 		bottom: 0;
+		color: #fff;
 		line-height: 120px;
-		padding-left: 20px;
+		padding-left: 20px;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 		font-size: 28px;
 		box-sizing: border-box;
 	}
@@ -369,6 +380,6 @@
 		color: #fff;
 		width: 20%;
 		height: 120px;
-		background-color: #535356;
+		background-color:#666666;
 	}
 </style>
