@@ -31,13 +31,13 @@
       <div class="Popular-span">
         <span>热门城市</span>
       </div>
-      <div class="Popular-add">
-        <ul>
-          <router-link :to="{name:'w-Search',query:{id:i.id,City:i.name}}"  v-for="(i,index) in Popular" :key="index+'Popular'">
-            <li>{{i.name}}</li>
-          </router-link>
-        </ul>
-      </div>
+        <div class="Popular-add">
+          <ul>
+            <router-link :to="{name:'w-Search',query:{id:i.id,City:i.name}}"  v-for="(i,index) in Popular" :key="index+'Popular'">
+              <li>{{i.name}}</li>
+            </router-link>
+          </ul>
+        </div> 
     </div>
     <!-- 全部城市 -->
     <div class="Allcities">
@@ -55,6 +55,9 @@
         </ul>
       </div>
     </div>
+    <!-- <div class="logif" v-show="type">
+      <img src="../../img/20140128102341_SAyMy.thumb.224_0.gif">
+    </div> -->
   </div>
 </template>
 
@@ -69,11 +72,18 @@ export default {
       // 全部城市
       Allcities: [],
       // A-Z
-      Letters:["A","B","C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","W","X","Y","Z"]
+      Letters:["A","B","C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","W","X","Y","Z"],
       // 因为I、O、U、V里面没有数据，所以arrlist里面就没有写I、O、U、V
+      loading: true,
+      type:true
     }
   },
   created () {
+    // function con() { 
+    //   var logif = document.querySelector('.logif');
+    //   logif.style.display = "none"
+    // }
+    // setTimeout("con()",2000)
     // 定位地址   北京
     this.$http.get('https://elm.cangdu.org/v1/cities?type=guess')
       .then(res=>{
@@ -106,6 +116,9 @@ export default {
       padding: 0;
       list-style: none;
       text-decoration: none;
+    }
+    body{
+      margin: 0;
     }
     .clearfix {zoom: 1;}
     .clearfix::after,
@@ -248,5 +261,21 @@ export default {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+    .logif{
+      width: 400px;
+      height: 400px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: -200px;
+      margin-left: -200px;
+      border-radius: 50px;
+
+    }
+    .logif img{
+      width: 400px;
+      height: 400px;
+      border-radius: 50px;
     }
 </style>
