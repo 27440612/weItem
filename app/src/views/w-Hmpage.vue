@@ -55,14 +55,16 @@
         </ul>
       </div>
     </div>
-    <!-- <div class="logif" v-show="type">
-      <img src="../../img/20140128102341_SAyMy.thumb.224_0.gif">
-    </div> -->
+    <comm></comm>
   </div>
 </template>
 
 <script>
+import comm from '../components/Common.vue'
 export default {
+  components: {
+    comm
+  },
   data(){
     return{
       // 定位地址
@@ -75,15 +77,11 @@ export default {
       Letters:["A","B","C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","W","X","Y","Z"],
       // 因为I、O、U、V里面没有数据，所以arrlist里面就没有写I、O、U、V
       loading: true,
-      type:true
+      type:true,
     }
   },
   created () {
-    // function con() { 
-    //   var logif = document.querySelector('.logif');
-    //   logif.style.display = "none"
-    // }
-    // setTimeout("con()",2000)
+    
     // 定位地址   北京
     this.$http.get('https://elm.cangdu.org/v1/cities?type=guess')
       .then(res=>{
@@ -262,20 +260,5 @@ export default {
       white-space: nowrap;
       text-overflow: ellipsis;
     }
-    .logif{
-      width: 400px;
-      height: 400px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin-top: -200px;
-      margin-left: -200px;
-      border-radius: 50px;
-
-    }
-    .logif img{
-      width: 400px;
-      height: 400px;
-      border-radius: 50px;
-    }
+    
 </style>

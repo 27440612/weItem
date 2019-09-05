@@ -61,7 +61,7 @@
 		</div>
 		
 		
-		
+		<comm></comm>
 		
 	</div>
 </template>
@@ -71,8 +71,12 @@
 
 
 <script>
+import comm from '../components/Common.vue'
 	import Swiper from 'swiper';
 	export default{
+		components: {
+    		comm
+  		},
 		data(){
 			return {
 				type:true,

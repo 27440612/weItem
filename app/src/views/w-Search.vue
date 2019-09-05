@@ -43,12 +43,17 @@
         <div class="Clear" @click="ClearBtn">
             <span>清除所有</span>
         </div>
+        <comm></comm>
     </div>
     
 </template>
 
 <script>
+import comm from '../components/Common.vue'
 export default {
+    components: {
+        comm
+    },
     data () {
         return {
             // 双向绑定
@@ -92,7 +97,6 @@ export default {
     }
 }
 </script>
-
 <style scoped>
     *{
         margin:0;
