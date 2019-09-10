@@ -9,10 +9,16 @@
 		
 		<header>
 			<div class="h_img">
-				图片
+				<img :src="shophttp + this.$route.params.image"/>
 			</div>
-			<div>
-				
+			<div class="h_left">
+				<span>{{this.$route.params.LoginName}}</span>
+			</div>
+			<div class="h_span">
+				<span>商家配送</span><span>/ 分钟送达</span><span>/ {{this.$route.params.tips}}</span>
+			</div>
+			<div class="h_xx">
+				<span>公告:</span><span>{{this.$route.params.Sky}}</span>
 			</div>
 		</header>
 		
@@ -88,10 +94,12 @@
 			}
 		},
 		created() {
+			this.shophttp='//elm.cangdu.org/img/'
 			this.axios.get('https://elm.cangdu.org/shopping/v2/menu?restaurant_id=1').then((res) => {
 				this.arr = res.data
 				console.log(this.arr[this.idx].foods)
 			})
+			console.log(this.$route)
 
 		},
 		methods: {
@@ -156,16 +164,40 @@
 		padding: 20px 30px;
 		height: 180px;
 		box-sizing: border-box;
-		background: #CCCCCC;
+		background:rgba(0,0,0,0.2) 
 	}
 	.h_img{
 		width: 140px;
 		height: 140px;
 		background: cornflowerblue;
+		float: left;
 	}
 	.h_img img{
 		width: 100%;
 		height: 100%;
+	}
+	.h_left{
+		float: left; 
+		width: 7rem;
+	}
+	.h_left span{
+		font-size: 0.7rem;
+		padding-left: 20px;
+		font-weight: bold;
+		color:#fff;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.h_span span{
+		padding-left: 20px;
+		line-height: 0.7rem;
+		color: #fff;
+		font-size: 0.4rem;
+	}
+	.h_xx span{
+		padding-left: 20px;
+		color: #fff;
 	}
 	.returnbtn{
 		color: black;

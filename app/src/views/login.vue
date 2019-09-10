@@ -39,8 +39,8 @@
 				附近商家
 			</div>
 			
-			<router-link to="/shopping_xiang">
-				<div class="shops" v-for="i,key in allshop">
+			<router-link :to="{name:'shopping_xiang',params:{image:i.image_path,LoginName:i.name,Sky:i.promotion_info,tips:i.piecewise_agent_fee.tips}}" v-for="(i,key) in allshop" :key="key">
+				<div class="shops">
 					<div class="shopimg"><img :src="shophttp + i.image_path"/></div>
 					<div class="shoptext">
 						<div class="name" style="font-weight: 600;"><span>品牌</span>
@@ -61,7 +61,7 @@
 		</div>
 		
 		
-		
+		<comm></comm>
 		
 	</div>
 </template>
@@ -71,8 +71,12 @@
 
 
 <script>
+import comm from '../components/Common.vue'
 	import Swiper from 'swiper';
 	export default{
+		components: {
+    		comm
+  		},
 		data(){
 			return {
 				type:true,
@@ -103,7 +107,7 @@
 		created(){
 			this.shophttp='//elm.cangdu.org/img/'
 			this.typehttp = 'https://fuss10.elemecdn.com';
-//			console.log(this.$route)
+			// console.log(this.$route)
 			
 //		分类
 			fetch('https://elm.cangdu.org/v2/index_entry')
@@ -117,6 +121,8 @@
 			.then(response=>response.json())
 			.then(response=>{
 				this.allshop = response;
+				// console.log(this.$route)
+				console.log(response)
 			})
 			console.log(this.city)
 		}
