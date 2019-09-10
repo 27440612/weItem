@@ -6,6 +6,7 @@ import Search from "./views/w-Search.vue"
 import logon from "./views/logon.vue";
 import login from "./views/login.vue";
 import amend from "./views/Amend.vue";
+import swipershow from "./views/swipershow.vue";
 
 Vue.use(Router);
 
@@ -51,6 +52,10 @@ export default new Router({
     	path:"/amend",
      name:"amend",
      component:amend
+    },{
+    	path:"/swipershow",
+     name:"swipershow",
+     component:swipershow
     }
   ]
 });

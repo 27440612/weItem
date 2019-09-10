@@ -2,7 +2,7 @@
 	<div>
 	    <header>
 		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i><p>上海<router-link to="./logon" class="j-router">
-		  		<span v-show="false">登录|注册</span>
+		  		<span v-show="false"><router-link to="./logon"></router-link></span>
 		  		<span v-show="true"><i class="icon iconfont icon-rentou" style="font-size: 18px;float: left;line-height: 50px;margin-right: 10px;color: #fff;"></i></span>
 		  	</router-link></p>
 		</header>

@@ -2,7 +2,7 @@
     <div class="amend">
         <header>
           <!-- router-link to 路由跳转 到密码登录页-->
-          <router-link to="/">
+          <router-link to="/logon">
             <span>&lt;</span>
           </router-link>
             <h4>重置密码</h4>

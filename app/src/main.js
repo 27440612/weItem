@@ -12,7 +12,11 @@ axios.defaults.withCredentials = true;
 import 'lib-flexible'
 import 'swiper/dist/css/swiper.css';
 import '../font/iconfont.css'
+import '../font/iconfontLyj.css'
 
+
+import animate from 'animate.css'
+Vue.use(animate);
 
 
 

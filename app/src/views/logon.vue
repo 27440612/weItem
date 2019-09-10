@@ -133,7 +133,7 @@
 	.j-headerleft {
 		color: white;
 		float: left;
-		font-size: 0.466666rem;
+		font-size: 0.566666rem;
 		height: 1.2rem;
 		line-height: 1.2rem;
 		margin-left: 0.266666rem;
@@ -248,7 +248,7 @@
 	}
 	
 	.j-content-three-center {
-		width: 1.733333rem;
+		width: 2.533333rem;
 		height: 1.333333rem;
 		float: right;
 	}
@@ -301,7 +301,7 @@
 	}
 	
 	.j-btn {
-		width: 80%;
+		width:100%;
 		height: 1.266666rem;
 		color: white;
 		border: none;
@@ -309,6 +309,7 @@
 		margin: 0 auto;
 		background: none;
 		font-size: 0.373333rem;
+		text-align:center;
 	}
 	
 	.j-footer-bottom {
@@ -324,7 +325,7 @@
 	.password_img {
 		width: 1.853333rem;
 		height: 0.866666rem;
-		margin-top: 0.24rem;
+		margin-top: 0.29rem;
 	}
 	.j-width{
 		width:100%;
@@ -332,6 +333,6 @@
 	}
 	.j-router{
 		text-decoration: none;
-		color: white
+		color: white;
 	}
 </style>
