@@ -3,7 +3,7 @@
     <div class="Search">
         <!-- 头部 -->
         <div class="header">
-            <router-link to="w-Hmpage">
+            <router-link to="/">
                 <span><</span>
                 <!-- 城市  BtnCity-->
                 <div class="BtnCity"> 
@@ -20,33 +20,40 @@
         <!-- 搜索 -->
         <div class="History">
             <ul>
-                <!-- <router-link  > -->
-                    <li @click="historyBtn(i)" v-for="(i,index) in Vague" :key="index+'History'">
+                <router-link :to="{name:'login',query:{address:i.name}}" v-for="(i,index) in Vague" :key="index+'History'">
+                    <li @click="historyBtn(i)">
                         <span class="placename">{{i.name}}</span>
                         <p class="location">{{i.address}}</p>
                     </li>
-                <!-- </router-link> -->
+                </router-link>
             </ul>
         </div>
         <span style="padding-left: 0.3125rem;">搜索历史</span>
         <!-- 搜索历史 -->
         <div class="History" v-if="hisrecords">
             <ul>
-                <li v-for="(i,index) in hisrecords" :key="index">
-                    <span class="placename">{{i.name}}</span>
-                    <p class="location">{{i.address}}</p> 
-                </li>
+                <router-link :to="{name:'login',query:{address:i.name}}" v-for="(i,index) in hisrecords" :key="index"> 
+                    <li>
+                        <span class="placename">{{i.name}}</span>
+                        <p class="location">{{i.address}}</p> 
+                    </li>
+                </router-link>
             </ul>
         </div>
         <div class="Clear" @click="ClearBtn">
             <span>清除所有</span>
         </div>
+        <comm></comm>
     </div>
     
 </template>
 
 <script>
+import comm from '../components/Common.vue'
 export default {
+    components: {
+        comm
+    },
     data () {
         return {
             // 双向绑定
@@ -90,7 +97,6 @@ export default {
     }
 }
 </script>
-
 <style scoped>
     *{
         margin:0;

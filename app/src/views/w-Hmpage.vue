@@ -31,13 +31,13 @@
       <div class="Popular-span">
         <span>热门城市</span>
       </div>
-      <div class="Popular-add">
-        <ul>
-          <router-link :to="{name:'w-Search',query:{id:i.id,City:i.name}}"  v-for="(i,index) in Popular" :key="index+'Popular'">
-            <li>{{i.name}}</li>
-          </router-link>
-        </ul>
-      </div>
+        <div class="Popular-add">
+          <ul>
+            <router-link :to="{name:'w-Search',query:{id:i.id,City:i.name}}"  v-for="(i,index) in Popular" :key="index+'Popular'">
+              <li>{{i.name}}</li>
+            </router-link>
+          </ul>
+        </div> 
     </div>
     <!-- 全部城市 -->
     <div class="Allcities">
@@ -55,11 +55,16 @@
         </ul>
       </div>
     </div>
+    <comm></comm>
   </div>
 </template>
 
 <script>
+import comm from '../components/Common.vue'
 export default {
+  components: {
+    comm
+  },
   data(){
     return{
       // 定位地址
@@ -69,11 +74,14 @@ export default {
       // 全部城市
       Allcities: [],
       // A-Z
-      Letters:["A","B","C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","W","X","Y","Z"]
+      Letters:["A","B","C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","W","X","Y","Z"],
       // 因为I、O、U、V里面没有数据，所以arrlist里面就没有写I、O、U、V
+      loading: true,
+      type:true,
     }
   },
   created () {
+    
     // 定位地址   北京
     this.$http.get('https://elm.cangdu.org/v1/cities?type=guess')
       .then(res=>{
@@ -106,6 +114,9 @@ export default {
       padding: 0;
       list-style: none;
       text-decoration: none;
+    }
+    body{
+      margin: 0;
     }
     .clearfix {zoom: 1;}
     .clearfix::after,
@@ -249,4 +260,5 @@ export default {
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+    
 </style>
