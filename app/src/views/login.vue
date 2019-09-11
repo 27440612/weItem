@@ -1,279 +1,181 @@
 <template>
-	<div>
-	    <header>
-<<<<<<< HEAD
-		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i><p>上海<router-link to="./logon" class="j-router">
-		  		<span v-show="false"><router-link to="./logon"></router-link></span>
-		  		<span v-show="true"><i class="icon iconfont icon-rentou" style="font-size: 18px;float: left;line-height: 50px;margin-right: 10px;color: #fff;"></i></span>
-		  	</router-link></p>
-=======
-		  	<i class="icon iconfont icon-sousuo" style="font-size: 18px;float: left;line-height: 50px;margin-left: 10px;color: #fff;" @click="search"></i>
-		  	<p style="text-align: center;">{{this.$route.query.address}}</p>
-			<i class="icon iconfont icon-rentou Login-i" style="font-size: 17px;float: right;line-height:49px;margin-right:10px;color: #fff;" v-show="true"></i>
-			<router-link to="./logon" class="j-router"></p>
-		  		<span v-show="false">登录|注册</span>
-		  	</router-link>
-			
->>>>>>> a6a3ed99307e10fe190d5d58e2b8f8614917bee9
-		</header>
-		
-		<div class="nav">
-			<div class="swiper-container">
-			    <div class="swiper-wrapper">
-			        <div class="swiper-slide">
-			        	<div class="all" v-if="key<=7" v-for="i,key in alltype">
-			        		<div class="icon"><img :src="typehttp + i.image_url"/></div>
-			        		<div class="title">{{i.title}}</div>
-			        	
-			        	</div>
-			        </div>
-			        <div class="swiper-slide">
-			        	<div class="all" v-if="key>7&&key<=15" v-for="i,key in alltype">
-			        		<div class="icon"><img :src="typehttp + i.image_url"/></div>
-			        		<div>{{i.title}}</div>
-			        	
-			        	</div>
-			        </div>
-			    </div>
-			    <!-- 如果需要分页器 -->
-			    <div class="swiper-pagination"></div> 
-			</div>
-		</div>
-		
-		<div class="main">
-			<div class="top">
-				<i class="icon iconfont icon-shangdian" style="font-size: 17px;margin-right:4px;"></i>
-				附近商家
-			</div>
-			
-			<router-link :to="{name:'shopping_xiang',params:{image:i.image_path,LoginName:i.name,Sky:i.promotion_info,tips:i.piecewise_agent_fee.tips}}" v-for="(i,key) in allshop" :key="key">
-				<div class="shops">
-					<div class="shopimg"><img :src="shophttp + i.image_path"/></div>
-					<div class="shoptext">
-						<div class="name" style="font-weight: 600;"><span>品牌</span>
-							<div class="shopname">{{i.name}}</div>
-						</div>
-						
-						<div class="talk">
-							评分
-							<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 1px #3190e8 solid;background: #fff;">准时送</span></div>
-						</div>
-						<div class="xian">
-							￥{{i.float_minimum_order_amount}}起送 / 配送费约 ￥{{i.float_delivery_fee}}
-							<div style="float: right;font-size: 12px;"><span class="time" >{{i.distance}}</span> / <span style="color: #3190e8;">{{i.order_lead_time}}</span></div>
-						</div>
-					</div>
-				</div>
-			</router-link>
-		</div>
-		
-		
-		<comm></comm>
-		
-	</div>
+  <div style="background:#f5f5f5;height:100%;width:10rem;">
+    <elmheader>
+      <template v-slot:left>
+        <router-link v-if="login_success" to="/personal">&lt;</router-link>
+        <router-link v-else to="/">&lt;</router-link>
+      </template>
+      <template v-slot:center v-if="login_type">密码登录</template>
+      <template v-slot:center v-else>账号注册</template>
+    </elmheader>
+    <div class="container">
+      <div>
+        <input type="text" v-model="user" placeholder="账号" />
+      </div>
+      <div>
+        <input type="password" placeholder="密码" v-model="password" />
+      </div>
+      <div>
+        <input type="text" placeholder="验证码" v-model="Verify" />
+        <img :src="yanUrl" class="img" />
+        <span @click="imgUrl()" style="cursor:pointer;margin-left:0.1rem">换一个</span>
+      </div>
+    </div>
+    <p class="p">温馨提示：未注册过的账号，登录时将自动注册</p>
+    <p class="p">注册过的用户可凭账号密码登录</p>
+    <button v-if="login_type" class="login" @click="login()">登录</button>
+    <button v-else class="login" @click="login()">注册</button>
+
+    <div class="chong">
+      <router-link to="/repassword" class="chong">重置密码?</router-link>
+    </div>
+  </div>
 </template>
 
-
-
-
-
 <script>
-import comm from '../components/Common.vue'
-	import Swiper from 'swiper';
-	export default{
-		components: {
-    		comm
-  		},
-		data(){
-			return {
-				type:true,
-				id:'',
-				city:'',
-				typehttp:'',
-				alltype:{},
-				allshop:{},
-				allres:{},
-			}
-		},
-		methods:{
-//      搜索餐馆
-		search(){
-			}
-		},
-		mounted(){
-		    new Swiper ('.swiper-container', {
-			    direction: 'horizontal', // 垂直切换选项
-			    loop: false, // 循环模式选项
-			    
-			    // 如果需要分页器
-			    pagination: {
-			      el: '.swiper-pagination',
-			    }
-			  })            
-		},
-		created(){
-			this.shophttp='//elm.cangdu.org/img/'
-			this.typehttp = 'https://fuss10.elemecdn.com';
-			// console.log(this.$route)
-			
-//		分类
-			fetch('https://elm.cangdu.org/v2/index_entry')
-			.then(response=>response.json())
-				.then(response=>{
-				this.alltype = response;
-			})
-			
-//		附近商家
-			fetch('https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762')
-			.then(response=>response.json())
-			.then(response=>{
-				this.allshop = response;
-				// console.log(this.$route)
-				console.log(response)
-			})
-			console.log(this.city)
-		}
-		
-	}
-	
-	
-</script>
-<style scoped>
-*{padding: 0;margin: 0;}
-a{
-	color:#666;
-}
-header{
-	width: 100%;
-	height: 100px;
-	background: #3190e8;
-}
-header p{
-	width: 51%;
-	height: 100px;
-	color: #fff;
-	font-size: 30px;
-	line-height: 100px;
-	padding: 5px 8px 0 8px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	box-sizing: border-box;
-	text-algin: center;
-	margin-left: 26%;
-}
-header span{
-	display: block;
-	float: right;
-}
- .swiper-container {
-    width: 100%;
-    height: 380px;
-    margin: 20px auto;
-}
-.all{
-	width: 25%;
-	height: 160px;
-	padding: 6px;
-	margin-top: 12px;
-	text-align: center;
-	box-sizing: border-box;
-	margin-bottom: 14px;
-	float: left;
-}
-.icon{
-	width: 100px;
-	height: 100px;
-	margin-left: 20%;
-}
-.icon img{
-	width: 100%;
-	height: 100%;
-}
-.Login-i{
-	position: absolute;
-	right: -40px;
-	top: 10px;
-}
-.icon-sousuo{
-	padding-left: 20px;
-	padding-top: 6px;
-}
-.main{
-	width: 100%;
-	height: auto;
-	margin-top: 30px;
-}
-.top{
-	height: 80px;
-	line-height: 80px;
-	padding-left: 1em;
-	text-align: left;
-	border-top: 1px #ccc solid;
-	border-bottom: 1px #ccc solid;
-}
-.icon-shangdian{
-	margin-left: 0;
-}
-.shops{
-	width: 100%;
-	height: 200px;
-	padding:18px ;
-	box-sizing: border-box;
-	border-bottom: 1px #ccc solid;
-}
-.shopimg{
-	width: 150px;
-	height: 150px;
-	float: left;
-}
-.shopimg>img{
-	width: 100%;
-	height: 100%;
-}
-.shoptext{
-	width: 76%;
-	height: 150px;
-	text-align: left;
-	float: right;
-}
-.shoptext>div{
-	height: 50px;
-}
-.shopname{
-	width: 50%;
-	height: 30px;
-	line-height: 30px;
-	float: left;
-	text-overflow: ellipsis;
-	white-space: normal;
-	overflow: hidden;
-	color: #333;
-	font-weight: bold;
-	font-size: 0.45rem;
-}
-.name span{
-	color: #333;
-	display: inline-block;
-	font-size: 16px;
-	float: left;
-	padding: 1px 4px;
-	background: yellow;
-	margin-right: 4px;
-	border-radius: 4px;
-}
-.song{
-	float: right;
-	
-}
-.song span{
-	display: inline-block;
-	font-size: 14px;
-	padding: 1px 3px;
-	color: #fff;
-	margin-right: 2px;
-	border-radius: 4px;
-	background: #3190e8;
-}
+import Header from "../components/Header";
+// import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
+export default {
+  components: {
+    elmheader: Header
+  },
+  data() {
+    return {
+      login_type: "", //判断登录注册
+      login_success: false, //有没有登陆成功
+      user: "",
+      password: "",
+      Verify: "",
+      randoms: "",
+      yanUrl: ""
+    };
+  },
+  created() {
+    var href = location.href.split("?")[1];
+    if (href == "in") {
+      this.login_type = true;
+    } else if (href == "up") {
+      this.login_type = false;
+    }
+    this.imgUrl();
 
+    if(localStorage.userName){
+      this.login_success=true
+    }else{
+      this.login_success=false
+    }
+    // console.log(this.$store.state)
+  },
+  // computed:{
+  //   userId(){
+  //     return this.$store.state.user.userId
+  //   }
+  // },
+  methods: {
+    // ...mapActions(['getUser']),
+    imgUrl() {
+      this.$http.post("http://elm.cangdu.org/v1/captchas", {}).then(data => {
+        this.yanUrl = data.data.code;
+      });
+    },
+    login(){
+      this.$http.post(
+          "https://elm.cangdu.org/v2/login",
+          {
+            username: this.user,
+            password: this.password,
+            captcha_code: this.Verify
+          },
+        )
+        .then(data => {
+          if(!this.user){
+            alert('请输入账号')
+          }else if(!this.password){
+            alert('请输入密码')
+          }else if(!this.Verify){
+            alert('请输入验证码')
+          }else if(this.user = data.data.username){
+            this.$store.commit('setUserid',data.data.user_id)
+            // this.$store.dispatch('addUserid',data.data.user_id)
+            this.$store.commit('setUsername',data.data.username)
+            this.$store.commit('setUserpoint',data.data.point)
+            this.$store.commit('setUsergift',data.data.gift_amount)
+            this.$store.commit('setUsercity',data.data.city)
+            this.$store.commit('setUserimg',data.data.avatar)
+            this.$store.commit('setUserblce',data.data.balance)
+            // this.$store.dispatch('getUser')
+            localStorage.userName=data.data.username
+            alert('登录成功')
+            this.$router.push('/personal')
+          }else{
+            alert(data.data.message)
+            this.imgUrl()
+          }
+          console.log(data);
+        });
+    },
+    }
+};
+</script>
+
+<style scoped>
+* {
+  margin: 0;
+  text-decoration: none;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+input {
+  border: none;
+  outline: none;
+  text-indent: 0.3rem;
+  color: #666;
+  display: inline-block;
+  vertical-align: middle;
+}
+.container {
+  height: auto;
+  margin-top: 0.6rem;
+  background: #fff;
+}
+.container div {
+  width: 100%;
+  height: 1.25rem;
+  border-bottom: 0.01rem solid #ccc;
+  padding: 0.375rem 0.5rem;
+  box-sizing: border-box;
+}
+.img {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -0.1rem;
+  margin-right: 0.3rem;
+}
+.p {
+  color: red;
+  font-size: 0.3125rem;
+  padding: 0.2rem 0.2rem;
+  line-height: 0.4688rem;
+}
+.login {
+  outline: none;
+  background-color: #4cd964;
+  border: 0.01rem;
+  width: 95%;
+  height: 1.25rem;
+  margin: 0 0.15rem;
+  color: #fff;
+  border-radius: 0.05rem;
+  font-size: 0.4375rem;
+}
+.chong {
+  float: right;
+  margin-right: 0.2rem;
+  font-size: 0.3rem;
+  color: #3b95e9;
+  margin-top: 0.1rem;
+}
 </style>

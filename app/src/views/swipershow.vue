@@ -1,10 +1,13 @@
 <template>
 	<div class="l-box">
-		<div class="l-header">
-			<div class="l-back"><router-link to="./login" style="text-decoration: none;color:white"><</router-link></div>
-			<div class="l-title">safdds</div>
-		</div>
-		<div style="width: 100%;height: 20.3125rem;position:fixed;top:2rem;left: 2px;" id="oBox"></div>
+		<elmheader>
+			<template v-slot:left>
+				<router-link to="/food">&lt;</router-link>
+			</template>
+			<template v-slot:center>{{$route.params.title}}</template>
+			<template v-slot:right></template>
+		</elmheader>
+		<div style="width: 100%;height: 20.3125rem;position:fixed;top:2rem;left: 0.03125rem;" id="oBox"></div>
 		<div class="sscontent">
 			<ul class="ss-listUl">
 				<li @click="showone">商家便利</li>
@@ -39,12 +42,12 @@
 						</ul>
 						<div class="filter_header_style">商家属性(可以多选)</div>
 						<ul class="filter_ul filter_ulOne">
-							   <li class="filter_li" v-for="i in filterText">
+							   <li class="filter_li" v-for="(i,$index) in filterText" @click="allBlue($index)" >
 								<span class="iconName">{{i.icon_name}}</span>{{i.name}}</li>
 						</ul>
 						<div class="confirm_filter">
 							<button>清空</button>
-							<button>确定</button>
+							<button @click="sure" id="blueBtn">确定</button>
 						</div>
 					</div>
 			</ul>
@@ -58,7 +61,7 @@
 					
 					<div class="talk">
 						评分
-						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 1px #3190e8 solid;background: #fff;">准时送</span></div>
+						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 0.015625rem #3190e8 solid;background: #fff;">准时送</span></div>
 					</div>
 					<div class="xian">
 						￥{{i.float_minimum_order_amount}}起送 / 配送费约 ￥{{i.float_delivery_fee}}
@@ -75,7 +78,11 @@
 		
 </template>
 <script>//elm.cangdu.org/img/16cc2b9d7ec51817.png
+import Header from "../components/Header";
 export default {
+	components: {
+		elmheader: Header,
+	},
 	data() {
 		return {
 			ssNum: '',
@@ -126,6 +133,20 @@ export default {
 		}
 	},
 	methods: {
+		allBlue(e){
+			console.log(e)
+			var blueBtns=document.querySelectorAll('.filter_li')
+            if(blueBtns[e+1].className='filter_li'){
+            	
+            	blueBtns[e+1].setAttribute('class','filter_li blueBtns')
+            
+            }
+           
+			
+		},
+		sure(){
+			console.log(11)
+		},
 		juti(a){
 			console.log(a)
 			this.ssNum=-1
@@ -238,11 +259,19 @@ export default {
 			this.shopList = data.data
 		})
 	},
-}</script>
-<style scoped>* {
+}
+</script>
+<style scoped>
+* {
 	margin: 0;
-	padding: 0;
+	/* padding: 0; */
 	color: #4f4f4f;
+}
+a{
+	color: #fff;
+}
+.blueBtns{
+	background: red;
 }
 .confirm_filter{
 	padding: 0.1875rem;
@@ -255,7 +284,8 @@ export default {
 	border-radius: 7%;
 	background: white;
 	font-size: 0.46875rem;
-	border:.025rem solid #eee;
+	border:0.025rem solid #eee;
+	outline:none;
 }
 .confirm_filter button:nth-of-type(1){
 	margin-right: 3%;
@@ -273,35 +303,35 @@ export default {
 	width: 0.56875rem;
     height: 0.56875rem;
     font-size: 0.36875rem;
-    border: .025rem solid #e4e4e4;
-    border-radius: .15rem;
-    margin-right: .25rem;
+    border: 0.025rem solid #e4e4e4;
+    border-radius: 0.15rem;
+    margin-right: 0.25rem;
     line-height: 0.56875rem;
     text-align: center;
 }
 .filter_ulOne li:nth-of-type(1) span{
 	color: #77cbd5;
-	border: .025rem solid #77cbd5;
+	border: 0.025rem solid #77cbd5;
 }
 .filter_ulOne li:nth-of-type(2) span{
 	color: #a4a4a4;
-	 border: .025rem solid #a4a4a4;
+	 border: 0.025rem solid #a4a4a4;
 }
 .filter_ulOne li:nth-of-type(3) span{
 	color: #77cbd5;
-	 border: .025rem solid #77cbd5;
+	 border: 0.025rem solid #77cbd5;
 }
 .filter_ulOne li:nth-of-type(4) span{
 	color: #dc9d6b;
-	border: .025rem solid #dc9d6b;
+	border: 0.025rem solid #dc9d6b;
 }
 .filter_ulOne li:nth-of-type(5) span{
 	color: #dc9d6b;
-	 border: .025rem solid #dc9d6b;
+	 border: 0.025rem solid #dc9d6b;
 }
 .filter_ulOne li:nth-of-type(6) span{
 	color: #a4a4a4;
-	 border: .025rem solid #a4a4a4;
+	 border: 0.025rem solid #a4a4a4;
 }
 .filter_ul{
 }
@@ -314,10 +344,10 @@ export default {
 	padding:0.1rem 0;
 	display: inline-block;
 	line-height: 0.7rem;
-    border: .025rem solid #eee;
+    border: 0.025rem solid #eee;
     width:27.5%;
     height: 0.7rem;
-    border-radius: .125rem;
+    border-radius: 0.125rem;
     font-size: 0.28125rem;
     margin-bottom: 0.46875rem;
     margin-right: 0.46875rem;
@@ -350,14 +380,14 @@ export default {
 }
 
 .iconfont {
-	margin: 0 .3rem 0 .8rem;
+	margin: 0 0.3rem 0 0.8rem;
 }
 
 .iName {
 	-ms-flex: auto;
 	flex: auto;
 	text-align: left;
-	text-indent: .25rem;
+	text-indent: 0.25rem;
 }
 
 .sort_list_li {
@@ -393,14 +423,14 @@ export default {
 
 .shop_li {
 	display: flex;
-	border-bottom: .025rem solid #f1f1f1;
-	padding: .4rem .2rem;
+	border-bottom: 0.025rem solid #f1f1f1;
+	padding: 0.4rem 0.2rem;
 }
 
 .shoplist_container {
 	width: 100%;
 	padding: 0;
-	margin-top: 1.98125rem;
+	/* margin-top: 1rem; */
 	list-style: none;
 	font-style: normal;
 }
@@ -414,8 +444,8 @@ export default {
 	justify-content: space-between;
 	height: 1.171875rem;
 	line-height: 1.171875rem;
-	padding-right: .5rem;
-	border-bottom: .025rem solid #e4e4e4;
+	padding-right: 0.5rem;
+	border-bottom: 0.025rem solid #e4e4e4;
 	list-style: none;
 	margin-left: 0.3125rem;
 	font-size: 0.3125rem;
@@ -462,10 +492,10 @@ export default {
 	width: 100%;
 	height: 1rem;
 	display: flex;
-	position: fixed;
-	top: 1.071875rem;
-	left: 0rem;
-	border-bottom: .025rem solid #eee;
+	/* position: fixed;
+	top: 1.5625rem;
+	left: 0rem; */
+	border-bottom: 0.025rem solid #eee;
 }
 
 .ss-listUl li {
@@ -509,7 +539,7 @@ export default {
 
 .category_left_li {
 	height: 1.171875rem;
-	padding: 0 .2rem;
+	padding: 0 0.2rem;
 }
 
 .category_img {
@@ -527,11 +557,11 @@ export default {
 	background: #ccc;
 	font-size: 0.1rem;
 	color: #fff;
-	padding: 0 .1rem;
-	border: .025rem solid #ccc;
-	border-radius: .8rem;
+	padding: 0 0.1rem;
+	border: 0.025rem solid #ccc;
+	border-radius: 0.8rem;
 	vertical-align: middle;
-	margin-right: .25rem;
+	margin-right: 0.25rem;
 	position: relative;
 	left: 0.45625rem;
 	top: 0;
@@ -539,14 +569,14 @@ export default {
 
 .shops{
 	width: 100%;
-	height: 200px;
-	padding:18px ;
+	height: 3.125rem;
+	padding:0.28125rem ;
 	box-sizing: border-box;
-	border-bottom: 1px #ccc solid;
+	border-bottom: 0.015625rem #ccc solid;
 }
 .shops>.shopimg{
-	width: 150px;
-	height: 150px;
+	width: 2.34375rem;
+	height: 2.34375rem;
 	float: left;
 }
 .shops>.shopimg>img{
@@ -554,18 +584,18 @@ export default {
 	height: 100%;
 }
 .shops>.shoptext{
-	width: 76%;
-	height: 150px;
+	width: 72%;
+	height: 2.34375rem;
 	text-align: left;
 	float: right;
 }
 .shops>.shoptext>div{
-	height: 50px;
+	height: 0.78125rem;
 }
 .shops>.shoptext>.name>.shopname{
 	width: 50%;
-	height: 30px;
-	line-height: 30px;
+	height: 0.46875rem;
+	line-height: 0.46875rem;
 	float: left;
 	text-overflow: ellipsis;
 	white-space: normal;
@@ -573,12 +603,12 @@ export default {
 }
 .shops>.shoptext>.name span{
 	display: inline-block;
-	font-size: 16px;
+	font-size: 0.25rem;
 	float: left;
-	padding: 1px 4px;
+	padding: 0.015625rem 0.0625rem;
 	background: yellow;
-	margin-right: 4px;
-	border-radius: 4px;
+	margin-right: 0.0625rem;
+	border-radius: 0.0625rem;
 }
 .shops>.shoptext>.talk>.song{
 	float: right;
@@ -586,11 +616,11 @@ export default {
 }
 .shops>.shoptext>.talk>.song>span{
 	display: inline-block;
-	font-size: 14px;
-	padding: 1px 3px;
+	font-size: 0.21875rem;
+	padding: 0.015625rem 0.046875rem;
 	color: #fff;
-	margin-right: 2px;
-	border-radius: 4px;
+	margin-right: 0.03125rem;
+	border-radius: 0.0625rem;
 	background: #3190e8;
 }
 
