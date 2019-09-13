@@ -55,6 +55,7 @@ a {
 }
 .left{
   font-weight: 700;
+  color: #fff;
 }
 .right {
   text-align: right;

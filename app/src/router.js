@@ -22,6 +22,10 @@ import jfshopping from './views/jf_shopping'
 import updownApp from './views/updownApp'
 import swipershow from './views/swipershow'
 import elmvip from './views/elmvip'
+import pay from './views/pay'
+import asd from './views/SHOPLIST'
+import swipershows from './views/swipershows'
+
 // import alert from './components/alert'
 Vue.use(Router)
 
@@ -29,6 +33,11 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/asd',
+      name: 'asd',
+      component: asd
+    },
     {
       path: '/',
       name: 'home',
@@ -135,9 +144,19 @@ export default new Router({
       component:swipershow,
     },
     {
+      path:'/swipershows',
+      name:'swipershows',
+      component:swipershows,
+    },
+    {
       path:'/elmvip',
       name:'elmvip',
       component:elmvip,
+    },
+    {
+      path:'/pay',
+      name:'pay',
+      component:pay,
     },
   ]
 })

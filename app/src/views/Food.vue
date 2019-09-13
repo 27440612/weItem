@@ -2,7 +2,7 @@
   <div style="height:100%;background:#f5f5f5">
     <elmheader>
       <template v-slot:left>
-        <span class="iconfont icon-sosuo" style="font-size:0.4688rem"></span>
+        <router-link to="/search"><span class="iconfont icon-sosuo" style="font-size:0.4688rem"></span></router-link>
       </template>
       <template v-slot:center>{{ads_name}}</template>
       <template v-slot:right v-if="login_success">
@@ -70,7 +70,7 @@
             </div>
 
             <div class="talk">
-              评分
+              <el-rate v-model="i.rating" disabled show-score text-color="#ff9a0d" disabled-void-color="#d1d1d1" score-template="{value}" style="font-size:0.21875rem;float: left;"></el-rate> 
               <div class="song" style="float: right;">
                 <span>蜂鸟专送</span>
                 <span style="color: #3190e8;border: 0.0156rem #3190e8 solid;background: #fff;">准时送</span>
@@ -90,10 +90,6 @@
     <elmfooter :num="1"></elmfooter>
   </div>
 </template>
-
-
-
-
 
 <script>
 import Header from "../components/Header";
@@ -167,6 +163,12 @@ export default {
   }
 };
 </script>
+<style>
+.el-rate__icon{
+ font-size: 0.375rem !important;
+ margin-right: 0 !important;
+}
+</style>
 <style scoped>
 * {
   margin: 0;
