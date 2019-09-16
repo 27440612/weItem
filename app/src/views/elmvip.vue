@@ -8,11 +8,11 @@
     </elmheader>
     <div>
       <div class="contain">
-        <p style="padding:0.3rem;font-size: 0.4rem;">为账户 <span style="font-weight: 700;font-size:0.390625rem">222222</span> 购买会员</p>
+        <p style="padding:0.3rem;font-size: 0.4rem;">为账户 <span style="font-weight: 700;font-size:0.390625rem">{{this.$store.state.user.userName}}</span> 购买会员</p>
         <div class="vip-item">
           <div class="tits"
                style="border-bottom: 0.64px solid gainsboro">
-            <router-link to><span style="float:right;color:gray;font-size:0.42rem">会员说明 > </span></router-link>
+            <router-link to="/elmvips"><span style="float:right;color:gray;font-size:0.42rem">会员说明 > </span></router-link>
             <p style="font-size: 0.4rem;"> 会员特权</p>
           </div>
           <div class="vip-logo">
@@ -41,7 +41,7 @@
         <div class="vip-item">
           <div class="tits">
             <p style=" border-bottom: 0.01rem solid gainsboro;font-size: 0.4rem;">开通会员</p>
-            <router-link to>
+            <router-link to="/payment">
               <div class="btn">购买</div>
             </router-link>
             <p style="font-size: 0.44rem;">1个月
@@ -51,14 +51,14 @@
         </div>
         <div class="vip-item">
           <div class="tits">
-            <router-link to>
+            <router-link to="/vipduihuan">
               <p style="font-size: 0.42rem;">兑换会员<span style="float:right;font-size: 0.44rem;">使用卡号卡密 ></span></p>
             </router-link>
           </div>
         </div>
         <div class="vip-item">
           <div class="tits">
-            <router-link to>
+            <router-link to="/vippiao">
               <p style="font-size: 0.42rem;">购买记录<span style="float:right;font-size: 0.44rem;">开发票 ></span></p>
             </router-link>
           </div>
@@ -109,7 +109,6 @@ p{
 .vip-logo dd p{
 	font-size: 0.3125rem;
 }
-
 .vip-logo dd h5{
 	font-size: 0.390625rem;
 	margin-bottom: 0.09375rem;

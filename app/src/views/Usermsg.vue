@@ -32,7 +32,7 @@
       </div>
     </router-link>
     <h3>账号绑定</h3>
-    <div class="msg border_t" @click="iphone()">
+    <div class="msg border_t" @click="iphone(),openMask()">
       <span>
         <img style="vertical-align: middle;margin:0 0.0625rem" src="../assets/img/iphone.png" />手机
       </span>
@@ -46,27 +46,52 @@
         <div class="username">修改</div>
       </div>
     </router-link>
-    <button class="exit" @click="exit()">退出登录</button>
+    <button class="exit" @click="exit(),openMask()">退出登录</button>
+    <dialog-bar v-if="alerttype" v-model="sendVal" type="confirm" :content="texts"></dialog-bar>
+    <dialog-bar v-else @danger="danger()" @cancel="cancel()" v-model="sendVal" type="danger" dangerText="退出登录" cancelText="再等等" content="是否退出登录"></dialog-bar>
   </div>
 </template>
 <script>
 import Header from "../components/Header";
+import dialogBar from '../components/alert'
 export default {
   components: {
-    elmheader: Header
+    'elmheader': Header,
+    'dialog-bar': dialogBar,
+  },
+  data(){
+    return{
+      sendVal: false,
+      texts:'',
+      alerttype:true
+    }
   },
   methods: {
+    openMask(index){
+        this.sendVal = true;
+    },
     exit() {
-      this.$store.dispatch("addUserid", '');
-      this.$store.commit("setUsername", '登录/注册');
-      this.$store.commit("setUserpoint", 0);
-      this.$store.commit("setUsergift",0);
-      this.$store.commit("setUsercity", '');
-      this.$store.commit("setUserimg", '');
-      this.$store.commit("setUserblce", 0);
-      localStorage.clear();
-      sessionStorage.clear();
-      this.$router.push("/personal");
+      this.alerttype=false
+    },
+    cancel(){
+        console.log('Cancel');
+        this.alerttype=true
+    },
+    danger(){
+        console.log('danger');
+      setTimeout(()=>{
+        this.$store.dispatch("addUserid", '');
+        this.$store.commit("setUsername", '登录/注册');
+        this.$store.commit("setUserpoint", 0);
+        this.$store.commit("setUsergift",0);
+        this.$store.commit("setUsercity", '');
+        this.$store.commit("setUserimg", '');
+        this.$store.commit("setUserblce", 0);
+        localStorage.clear();
+        sessionStorage.clear();
+        this.alerttype=true
+        this.$router.push("/personal");
+      },800)
     },
     changeimg() {
       var f = imgfile.files[0];
@@ -78,10 +103,11 @@ export default {
       // }).then(data => {
       //   console.log(data);
       // });
-      alert("上传失败");
+      this.texts='上传失败'
+      this.openMask()
     },
     iphone() {
-      alert("请在手机APP中设置");
+      this.texts='请在手机APP中设置'
     }
   }
 };
@@ -89,6 +115,7 @@ export default {
 <style scoped>
 * {
   margin: 0;
+  z-index: 1;
 }
 .msg {
   background: #fff;

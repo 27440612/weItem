@@ -9,11 +9,9 @@
 					<span style="font-size:0.9375rem;line-height:1.875rem"><slot name="num"></slot></span>
 					<span style="font-size:0.4688rem"><slot name="units"></slot></span>
 				</p>
-				<router-link to="/">
 					<div class="btns">
 						<slot name="btn"></slot>
 					</div>
-				</router-link>
 			</div>
 		</div>
 		<p class="jy"><slot name="loding-tit"></slot></p>

@@ -98,7 +98,7 @@ export default {
       });
     console.log(this.$store.state.user);
 
-    if(localStorage.userName){
+    if(sessionStorage.userName){
       this.login_success=true
     }else{
       this.login_success=false

@@ -35,14 +35,18 @@
         </div>
       </section>
     </form>
-    <div class="login_container" @click="confirm">确认修改</div>
+    <div class="login_container" @click="confirms(),openMask()">确认修改</div>
+    <dialog-bar v-model="sendVal" type="confirm" :content="texts"></dialog-bar>
   </div>
 </template>
 <script>
 import Header from "../components/Header";
+import dialogBar from "../components/alert";
+var md5 = require("md5");
 export default {
   components: {
-    elmheader: Header
+    elmheader: Header,
+    "dialog-bar": dialogBar
   },
   data() {
     return {
@@ -51,7 +55,9 @@ export default {
       newpassword: "" /*新密码*/,
       confirmpassword: "" /*确认密码*/,
       Verify: "" /*验证码的双向绑定*/,
-      yanUrl: "" /*验证码 */
+      yanUrl: "" /*验证码 */,
+      sendVal: false,
+      texts:''
     };
   },
   created() {
@@ -59,34 +65,38 @@ export default {
     // console.log(this.Verify)
   },
   methods: {
-    confirm() {
+    openMask(index) {
+      this.sendVal = true;
+    },
+    confirms() {
       this.axios
         .post("https://elm.cangdu.org/v2/changepassword", {
           username: this.user,
-          oldpassWord: this.oldpassword,
-          newpassword: this.newpassword,
-          confirmpassword: this.confirmpassword,
+          oldpassWord: md5(this.oldpassword),
+          newpassword: md5(this.newpassword),
+          confirmpassword: md5(this.confirmpassword),
           captcha_code: this.Verify
         })
         .then(data => {
           console.log(data);
           if (!this.user) {
-            alert("请输入账号");
+            this.texts='请输入账号'
           } else if (!this.oldpassword) {
-            alert("请输入旧密码");
+            this.texts='请输入旧密码'
           } else if (!this.newpassword) {
-            alert("请输入新密码");
+            this.texts='请输入新密码'
           } else if (!this.confirmpassword) {
-            alert("请输入确认密码");
+            this.texts='请输入确认密码'
           } else if (this.newpassword != this.confirmpassword) {
-            alert("两次输入的密码不一致");
+            this.texts='两次输入的密码不一致'
           } else if (!this.Verify) {
-            alert("请输入验证码");
+            this.texts='请输入验证码'
           } else if (data.data.status != 0) {
-            alert(data.data.success);
-            this.$router.push({ path: "/login?in" });
+            this.texts=data.data.success
+            setTimeout(()=>{this.$router.push('/login?in')},800)
+            // this.$router.push({ path: "/login?in" });
           } else {
-            alert(data.data.message);
+            this.texts=data.data.message
           }
         });
     },
@@ -104,6 +114,7 @@ export default {
   text-decoration: none;
   outline: none;
   font-size: 0.3rem;
+  z-index: 1;
 }
 input {
   border: none;

@@ -41,18 +41,22 @@
           <p>我的余额</p>
         </div>
       </router-link>
-      <div>
-        <p>
-          <span style="color:#ff5f3e">{{this.$store.state.user.userGift}}</span>个
-        </p>
-        <p>我的优惠</p>
-      </div>
-      <div>
-        <p>
-          <span style="color:#6ac20b">{{this.$store.state.user.userPoint}}</span>分
-        </p>
-        <p>我的积分</p>
-      </div>
+      <router-link to="/benefit" tag="div">
+        <div>
+          <p>
+            <span style="color:#ff5f3e">{{this.$store.state.user.userGift}}</span>个
+          </p>
+          <p>我的优惠</p>
+        </div>
+      </router-link>
+      <router-link to="/myjifen" tag="div">
+          <div>
+          <p>
+            <span style="color:#6ac20b">{{this.$store.state.user.userPoint}}</span>分
+          </p>
+          <p>我的积分</p>
+        </div>
+      </router-link>
     </div>
     <div class="dingdan">
       <router-link to="/order" tag="div">
@@ -106,7 +110,7 @@ export default {
     // console.log('----------------',this.$store.state.user);
     // this.hqzl();
 
-    if (localStorage.userName) {
+    if (sessionStorage.userName) {
       this.login_success = true;
     } else {
       this.login_success = false;

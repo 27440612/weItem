@@ -23,8 +23,9 @@
     </div>
     <p class="p">温馨提示：未注册过的账号，登录时将自动注册</p>
     <p class="p">注册过的用户可凭账号密码登录</p>
-    <button v-if="login_type" class="login" @click="login()">登录</button>
-    <button v-else class="login" @click="login()">注册</button>
+    <button v-if="login_type" class="login" @click="login(),openMask()">登录</button>
+    <button v-else class="login" @click="login(),openMask()">注册</button>
+    <dialog-bar v-model="sendVal" type="confirm" :content="texts"></dialog-bar>
 
     <div class="chong">
       <router-link to="/repassword" class="chong">重置密码?</router-link>
@@ -33,11 +34,14 @@
 </template>
 
 <script>
+import dialogBar from '../components/alert'
 import Header from "../components/Header";
+var md5 = require('md5');
 // import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 export default {
   components: {
-    elmheader: Header
+    'elmheader': Header,
+    'dialog-bar': dialogBar,
   },
   data() {
     return {
@@ -47,7 +51,9 @@ export default {
       password: "",
       Verify: "",
       randoms: "",
-      yanUrl: ""
+      yanUrl: "",
+      texts:'',
+      sendVal: false,
     };
   },
   created() {
@@ -59,7 +65,7 @@ export default {
     }
     this.imgUrl();
 
-    if(localStorage.userName){
+    if(sessionStorage.userName){
       this.login_success=true
     }else{
       this.login_success=false
@@ -73,27 +79,33 @@ export default {
   // },
   methods: {
     // ...mapActions(['getUser']),
+    openMask(index){
+      setTimeout(()=>{
+        this.sendVal = true;
+      },500)
+    },
     imgUrl() {
       this.$http.post("http://elm.cangdu.org/v1/captchas", {}).then(data => {
         this.yanUrl = data.data.code;
       });
     },
     login(){
+      console.log(md5(this.password))
       this.$http.post(
           "https://elm.cangdu.org/v2/login",
           {
             username: this.user,
-            password: this.password,
+            password: md5(this.password),
             captcha_code: this.Verify
           },
         )
         .then(data => {
           if(!this.user){
-            alert('请输入账号')
+            this.texts='请输入账号'
           }else if(!this.password){
-            alert('请输入密码')
+            this.texts='请输入密码'
           }else if(!this.Verify){
-            alert('请输入验证码')
+            this.texts='请输入验证码'
           }else if(this.user = data.data.username){
             this.$store.commit('setUserid',data.data.user_id)
             // this.$store.dispatch('addUserid',data.data.user_id)
@@ -104,11 +116,11 @@ export default {
             this.$store.commit('setUserimg',data.data.avatar)
             this.$store.commit('setUserblce',data.data.balance)
             // this.$store.dispatch('getUser')
-            localStorage.userName=data.data.username
-            alert('登录成功')
-            this.$router.push('/personal')
+            sessionStorage.userName=data.data.username
+            this.texts='登录成功'
+            setTimeout(()=>{this.$router.push('/personal')},800)
           }else{
-            alert(data.data.message)
+            this.texts=data.data.message
             this.imgUrl()
           }
           console.log(data);
@@ -121,6 +133,7 @@ export default {
 <style scoped>
 * {
   margin: 0;
+  z-index: 1;
   text-decoration: none;
 }
 html,

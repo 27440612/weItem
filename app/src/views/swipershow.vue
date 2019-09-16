@@ -7,7 +7,7 @@
 			<template v-slot:center>{{$route.params.title}}</template>
 			<template v-slot:right></template>
 		</elmheader>
-		<div style="width: 100%;height: 12.6953125rem;position:fixed;top:1.25rem;left: 0.03125rem;" id="oBox"></div>
+		<div style="width: 100%;height: 12.6953125rem;position:fixed;top:1.25rem;left: 0.03125rem;background:rgba(0,0,0,0) !important" id="oBox"></div>
 		<div class="sscontent">
 			<ul class="ss-listUl">
 				<li @click="showone">商家便利</li>
@@ -37,17 +37,17 @@
 					<div class="listshow2" v-if="ssNum==3">
 						<div class="filter_header_style">配送方式</div>
 						<ul class="filter_ul">
-							<li class="filter_li" v-for="i in xuanList" @click="isChoose=!isChoose" :class="isChoose?'blueBtns':''">
+							<li class="filter_li" v-for="i in xuanList" @click="niao(i)" :class="isChoose?'blueBtns':''">
 								<i class="iconfont icon-fengniao"></i>{{i.text}}</li>
 						</ul>
 						<div class="filter_header_style">商家属性(可以多选)</div>
 						<ul class="filter_ul filter_ulOne">
-							   <li class="filter_li" v-for="(i,$index) in filterText" @click="allBlue($index)" :style="{'color':blueIndex[$index+1]?'#3190E8':''}">
+							   <li class="filter_li" v-for="(i,$index) in filterText" @click="allBlue(i.id,$index)" :style="{'color':blueIndex[$index+1]?'#3190E8':''}">
 								<span class="iconName" :style="{'color':blueIndex[$index+1]?'#3190E8':''}">{{blueIndex[$index+1]?'√':i.icon_name}}</span>{{i.name}}</li>
 						</ul>
 						<div class="confirm_filter">
 							<button @click="qingkong">清空</button>
-							<button @click="sure" id="blueBtn">确定</button>
+							<button @click="sure" id="blueBtn">确定({{totalNum}})</button>
 						</div>
 					</div>
 			</ul>
@@ -61,7 +61,7 @@
 					
 					<div class="talk">
 						评分
-						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 0.015625rem #3190e8 solid;background: #fff;">准时送</span></div>
+						<div class="song" style="float: right;"><span>蜂鸟专送</span> <span style="color: #3190e8;border: 1px #3190e8 solid;background: #fff;">准时送</span></div>
 					</div>
 					<div class="xian">
 						￥{{i.float_minimum_order_amount}}起送 / 配送费约 ￥{{i.float_delivery_fee}}
@@ -86,86 +86,115 @@ export default {
 			ssNum: '',
 			category: '',
 			actives: '',
-			clickNum:'',
-            filterText:'',
+			clickNum: '',
+			filterText: '',
 			shopList: '',
-			xuanList:'',
-			isChoose:false,
-	        blueIndex:[0,0,0,0,0,0,0],
-	        
-	        
-	      
+			xuanList: '',
+			isChoose: false,
+			blueIndex: [0, 0, 0, 0, 0, 0, 0],
+
+			last: [],
+			elivery:'',
+			totalNum:0,
 
 			sorts_title: [{
 					name: '智能排序',
 					img: 'icon-paixu',
 					ev: 'paixu',
-					num:0,
+					num: 0,
 				},
 				{
 					name: '距离最近',
 					img: 'icon-juli',
 					ev: 'juli',
-					num:1,
+					num: 1,
 				},
 				{
 					name: '销量最高',
 					img: 'icon-huomiao',
 					ev: 'xiaoliang',
-					num:2,
+					num: 2,
 				},
 				{
 					name: '起送价最低',
 					img: 'icon-price',
 					ev: 'qisongjia',
-					num:3,
+					num: 3,
 				},
 				{
 					name: '配送速度最快',
 					img: 'icon-juli',
 					ev: 'sudu',
-					num:4,
+					num: 4,
 				},
 				{
 					name: '评分最高',
 					img: 'icon-xingzhuang60kaobei2',
 					ev: 'pingfen',
-					num:5,
+					num: 5,
 				},
 			]
 		}
 	},
 	methods: {
-		qingkong(){
-			this.blueIndex=[0,0,0,0,0,0,0]
+		niao(i){
+			
+			this.isChoose=!this.isChoose
+			if(this.isChoose){
+				this.totalNum++
+				this.elivery=i.id
+			}else{
+				this.totalNum--
+				this.elivery=null
+			}
+
 		},
-		allBlue(e){	
-			if(!this.blueIndex[e+1]){
-					this.$set(this.blueIndex,e+1,this.filterText[e].id)
-				}else{
-					this.$set(this.blueIndex,e+1,0)
-				}
+		
+		qingkong() {
+			this.blueIndex = [0, 0, 0, 0, 0, 0, 0]
 		},
-		sure(){
-			console.log(this.xuanList[0].id)
-			this.ssNum=-1
-			var oBox = document.getElementById('oBox')
-			oBox.style.background='none'
+		allBlue(i, e) {
+//			console.log(i)
 			console.log(this.blueIndex)
+			if(!this.blueIndex[e + 1]) {
+				this.last.push(i)
+				this.totalNum++
+				this.$set(this.blueIndex, e + 1, this.filterText[e].id)
+			} else {
+				this.totalNum--
+				this.$set(this.blueIndex, e + 1, 0)
+				for(var r = 0; r < this.last.length; r++) {
+					if(this.last.indexOf(i) > -1) {
+						this.last.splice(this.last.indexOf(i), 1)
+					}
+				}
+			}
+			console.log(this.last)
+		},
+		sure() {
+			console.log(this.xuanList[0].id)
+			this.ssNum = -1
+			var oBox = document.getElementById('oBox')
+			oBox.style.background = 'none'
+			//console.log(this.blueIndex)
+             var a=''
+            this.last.forEach(item=>{
+                a+="&support_ids[]="+item
+            })
+            a=a.slice(1)
+            console.log(a)
 			
-			
-//			console.log(this.yu)
-			this.axios.get('http://elm.cangdu.org/shopping/restaurants?latitude=32.0415&longitude=118.79505&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=null&delivery_mode[]=1&support_ids[]=8').then((data) => {
+			this.axios.get('http://elm.cangdu.org/shopping/restaurants?latitude=32.0415&longitude=118.79505&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=null&delivery_mode[]='+this.elivery_mode+'&'+a).then((data) => {
 				//	console.log(data)
 				this.shopList = data.data
 			})
 		},
-		juti(a){
+		juti(a) {
 			console.log(a)
-			this.ssNum=-1
+			this.ssNum = -1
 			var oBox = document.getElementById('oBox')
-			oBox.style.background='none'
-			this.axios.get('http://elm.cangdu.org/shopping/restaurants?latitude=39.924351&longitude=116.417491&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]='+a+'&order_by=null&delivery_mode[]=null').then((data) => {
+			oBox.style.background = 'none'
+			this.axios.get('http://elm.cangdu.org/shopping/restaurants?latitude=39.924351&longitude=116.417491&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=' + a + '&order_by=null&delivery_mode[]=null').then((data) => {
 				//	console.log(data)
 				this.shopList = data.data
 			})
@@ -178,7 +207,6 @@ export default {
 			console.log(this.ssNum)
 			if(this.ssNum != 1) {
 				this.ssNum = 1
-				oBox.style.background = 'rgba(0,0,0,.5)'
 			} else {
 				this.ssNum = -1
 				oBox.style.background = 'none'
@@ -188,7 +216,6 @@ export default {
 			var oBox = document.getElementById('oBox')
 			if(this.ssNum != 2) {
 				this.ssNum = 2
-				oBox.style.background = 'rgba(0,0,0,.5)'
 			} else {
 				this.ssNum = -1
 				oBox.style.background = 'none'
@@ -198,18 +225,17 @@ export default {
 			var oBox = document.getElementById('oBox')
 			if(this.ssNum != 3) {
 				this.ssNum = 3
-				oBox.style.background = 'rgba(0,0,0,.5)'
 			} else {
 				this.ssNum = -1
 				oBox.style.background = 'none'
 			}
 		},
-		reSort(a,b) {
-			this.clickNum=b
+		reSort(a, b) {
+			this.clickNum = b
 			this[a]()
 			var oBox = document.getElementById('oBox')
-			 oBox.style.background='none'
-			this.ssNum=-1
+			oBox.style.background = 'none'
+			this.ssNum = -1
 		},
 		paixu() {
 			console.log('paixu')
@@ -222,7 +248,7 @@ export default {
 			this.axios.get('http://elm.cangdu.org/shopping/restaurants?latitude=39.924351&longitude=116.417491&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=5&delivery_mode[]=null').then((data) => {
 				//	console.log(data)
 				this.shopList = data.data
-			 })
+			})
 		},
 		xiaoliang() {
 			this.axios.get('http://elm.cangdu.org/shopping/restaurants?latitude=39.924351&longitude=116.417491&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=6&delivery_mode[]=null').then((data) => {
@@ -251,19 +277,19 @@ export default {
 	},
 	created() {
 		//筛选
-		this.axios.get('http://elm.cangdu.org/shopping/v1/restaurants/delivery_modes?latitude=39.924351&longitude=116.417491&kw=').then((data)=>{
-//			console.log(data)
-			this.xuanList=data.data
+		this.axios.get('http://elm.cangdu.org/shopping/v1/restaurants/delivery_modes?latitude=39.924351&longitude=116.417491&kw=').then((data) => {
+			//			console.log(data)
+			this.xuanList = data.data
 			console.log(this.xuanList)
 		})
-		this.axios.get('http://elm.cangdu.org/shopping/v1/restaurants/activity_attributes?latitude=39.924351&longitude=116.417491&kw=').then((data)=>{
+		this.axios.get('http://elm.cangdu.org/shopping/v1/restaurants/activity_attributes?latitude=39.924351&longitude=116.417491&kw=').then((data) => {
 			console.log(data)
-			this.filterText=data.data
+			this.filterText = data.data
 			console.log(this.filterText)
 		})
 		//美食
 		this.axios.get('http://elm.cangdu.org/shopping/v2/restaurant/category?latitude=39.73204&longitude=116.14265').then((data) => {
-//			console.log(data.data)
+			//			console.log(data.data)
 			this.category = data.data
 		})
 		//展示
@@ -273,6 +299,7 @@ export default {
 	},
 }
 </script>
+<style scoped>
 <style scoped>
 * {
 	margin: 0;
@@ -389,7 +416,6 @@ a{
 .sscontent {
 	width: 100%;
 	position: relative;
-	top: -0.3rem;
 }
 
 .iconfont {

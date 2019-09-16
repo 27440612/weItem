@@ -1,8 +1,15 @@
 <template>
   <div style="height:100%;background:#f5f5f5">
+    <div>
+      <transition name="fade">
+        <loading v-if="isLoading"></loading>
+      </transition>
+    </div>
     <elmheader>
       <template v-slot:left>
-        <router-link to="/search"><span class="iconfont icon-sosuo" style="font-size:0.4688rem"></span></router-link>
+        <router-link to="/search">
+          <span class="iconfont icon-sosuo" style="font-size:0.4688rem"></span>
+        </router-link>
       </template>
       <template v-slot:center>{{ads_name}}</template>
       <template v-slot:right v-if="login_success">
@@ -32,10 +39,10 @@
           <div class="swiper-slide">
             <div class="all" v-for="(i,key) in alltype" :key="key" v-if="key>7&&key<=15">
               <router-link :to="{name:'swipershow',params:{title:i.title}}" style="color:#000">
-                  <div class="icon">
-                    <img :src="typehttp + i.image_url" />
-                  </div>
-                  <div>{{i.title}}</div>
+                <div class="icon">
+                  <img :src="typehttp + i.image_url" />
+                </div>
+                <div>{{i.title}}</div>
               </router-link>
             </div>
           </div>
@@ -59,7 +66,7 @@
         v-for="(i,key) in allshop"
         :key="key"
       >
-        <div class="shops">
+        <div class="shops" @click="uid(i.id)">
           <div class="shopimg">
             <img :src="shophttp + i.image_path" />
           </div>
@@ -70,7 +77,15 @@
             </div>
 
             <div class="talk">
-              <el-rate v-model="i.rating" disabled show-score text-color="#ff9a0d" disabled-void-color="#d1d1d1" score-template="{value}" style="font-size:0.21875rem;float: left;"></el-rate> 
+              <el-rate
+                v-model="i.rating"
+                disabled
+                show-score
+                text-color="#ff9a0d"
+                disabled-void-color="#d1d1d1"
+                score-template="{value}"
+                style="font-size:0.21875rem;float: left;"
+              ></el-rate>
               <div class="song" style="float: right;">
                 <span>蜂鸟专送</span>
                 <span style="color: #3190e8;border: 0.0156rem #3190e8 solid;background: #fff;">准时送</span>
@@ -94,27 +109,34 @@
 <script>
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import loading from "../components/loading";
 import Swiper from "swiper";
 export default {
   components: {
     elmheader: Header,
-    elmfooter: Footer
+    elmfooter: Footer,
+    loading: loading
   },
   data() {
     return {
       type: true,
       id: "",
       city: "",
-	  typehttp: "",
-	  ads_name:'',
+      typehttp: "",
+      ads_name: "",
       alltype: {},
       allshop: {},
-      allres: {}
+      allres: {},
+      isLoading: true
     };
   },
   methods: {
     //      搜索餐馆
-    search() {}
+    search() {},
+    uid(i) {
+      localStorage.setItem("uid", i);
+      console.log(i);
+    }
   },
   mounted() {
     new Swiper(".swiper-container", {
@@ -128,7 +150,7 @@ export default {
     });
   },
   created() {
-    if (localStorage.userName) {
+    if (sessionStorage.userName) {
       this.login_success = true;
     } else {
       this.login_success = false;
@@ -136,11 +158,13 @@ export default {
 
     this.shophttp = "//elm.cangdu.org/img/";
     this.typehttp = "https://fuss10.elemecdn.com";
-	// console.log(this.$route)
-	
-	fetch('https://elm.cangdu.org/v2/pois/' + this.$route.query.geohash).then(response => response.json()).then(res => {
-      this.ads_name = res.name
-    })
+    // console.log(this.$route)
+
+    fetch("https://elm.cangdu.org/v2/pois/" + this.$route.query.geohash)
+      .then(response => response.json())
+      .then(res => {
+        this.ads_name = res.name;
+      });
 
     //		分类
     fetch("https://elm.cangdu.org/v2/index_entry")
@@ -155,18 +179,21 @@ export default {
     )
       .then(response => response.json())
       .then(response => {
-        this.allshop = response;
+        setTimeout(()=>{
+          this.isLoading = false;
+          this.allshop = response;
+          console.log(response);
+        },2000)
         // console.log(this.$route)
-        console.log(response);
       });
     console.log(this.city);
   }
 };
 </script>
 <style>
-.el-rate__icon{
- font-size: 0.375rem !important;
- margin-right: 0 !important;
+.el-rate__icon {
+  font-size: 0.375rem !important;
+  margin-right: 0 !important;
 }
 </style>
 <style scoped>

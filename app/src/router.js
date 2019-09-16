@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
 import City from './views/City'
-import Login from './views/login'
+import Login from './views/Login'
 import Personal from './views/Personal'
 import Food from './views/Food'
 import Order from './views/Order'
@@ -23,10 +23,30 @@ import updownApp from './views/updownApp'
 import swipershow from './views/swipershow'
 import elmvip from './views/elmvip'
 import pay from './views/pay'
-import asd from './views/SHOPLIST'
-import swipershows from './views/swipershows'
+import benefit from './views/benefit'
+import scroll from './components/scroll'
+import aaa from './views/aaa'
+import hbred from './views/hbred'
+import historyhb from './views/historyhb'
+import exchange from './views/exchange'
+import commend from './views/commend'
+import coupon from './views/coupon'
+import myjifen from './views/myjifen'
+import scoreinfo from './views/scoreinfo'
+import confirmOrder from './views/confirmOrder.vue'// 确认订单
+import chooseaddress from './views/chooseAddress.vue'// 选择地址
+import addaddress from './views/addAddress.vue' //添加地址
+import kouwei from './views/kouwei.vue'//订单备注
+import invoice from './views/invoice.vue' //订单的发票
+import Select_address2 from './views/Select_address2'
+import bbb from './views/bbb'
+import elmvips from './views/elmvips'
+import payment from './views/payment'
+import vipduihuan from './views/vipduihuan'
+import vippiao from './views/vippiao'
+import abc from './views/abc'
 
-// import alert from './components/alert'
+
 Vue.use(Router)
 
 export default new Router({
@@ -34,9 +54,19 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/asd',
-      name: 'asd',
-      component: asd
+      path: '/abc',
+      name: 'abc',
+      component: abc
+    },
+    {
+      path: '/aaa',
+      name: 'aaa',
+      component: aaa
+    },
+    {
+      path: '/bbb',
+      name: 'bbb',
+      component: bbb
     },
     {
       path: '/',
@@ -144,11 +174,6 @@ export default new Router({
       component:swipershow,
     },
     {
-      path:'/swipershows',
-      name:'swipershows',
-      component:swipershows,
-    },
-    {
       path:'/elmvip',
       name:'elmvip',
       component:elmvip,
@@ -157,6 +182,101 @@ export default new Router({
       path:'/pay',
       name:'pay',
       component:pay,
+    },
+    {
+      path:'/benefit',
+      name:'benefit',
+      component:benefit,
+    },
+    {
+      path:'/scroll',
+      name:'scroll',
+      component:scroll,
+    },
+    {
+      path:'/hbred',
+      name:'hbred',
+      component:hbred,
+    },
+    {
+      path:'/historyhb',
+      name:'historyhb',
+      component:historyhb,
+    },
+    {
+      path:'/exchange',
+      name:'exchange',
+      component:exchange,
+    },
+    {
+      path:'/commend',
+      name:'commend',
+      component:commend,
+    },
+    {
+      path:'/coupon',
+      name:'coupon',
+      component:coupon,
+    },
+    {
+      path:'/myjifen',
+      name:'myjifen',
+      component:myjifen,
+    },
+    {
+      path:'/scoreinfo',
+      name:'scoreinfo',
+      component:scoreinfo,
+    },
+    {
+      path: '/invoice',
+      name: 'invoice',
+      component: invoice
+    },
+    {
+      path: '/kouwei',
+      name: 'kouwei',
+      component: kouwei
+    },
+    {
+      path: '/addaddress',
+      name: 'addaddress',
+      component: addaddress
+    },
+    {
+      path: '/chooseaddress',
+      name: 'chooseaddress',
+      component: chooseaddress
+    },
+    {
+      path: '/confirmOrder',
+      name: 'confirmOrder',
+      component: confirmOrder
+    },
+    {
+      path:'/select_address2',
+      name:'select_address2',
+      component:Select_address2,
+    },
+    {
+      path:'/elmvips',
+      name:'elmvips',
+      component:elmvips,
+    },
+    {
+      path:'/payment',
+      name:'payment',
+      component:payment,
+    },
+    {
+      path:'/vipduihuan',
+      name:'vipduihuan',
+      component:vipduihuan,
+    },
+    {
+      path:'/vippiao',
+      name:'vippiao',
+      component:vippiao,
     },
   ]
 })
